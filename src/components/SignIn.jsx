@@ -2,12 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header'
 
+
 function SignIn() {
+
+
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 
       {/*  Site header */}
-      <Header />
+      {/* <Header /> */}
 
       {/*  Page content */}
       <main className="flex-grow">
@@ -18,7 +22,7 @@ function SignIn() {
 
               {/* Page header */}
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20 st-header-title">
-                <h2>Welcome back</h2>
+                <h2>Welcome <span>back</span></h2>
               </div>
 
               {/* Form */}

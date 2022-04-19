@@ -1,15 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import api from '../appwrite/appwrite'
 
 import Header from './Header';
 
 function SignUp() {
+
+  const signUpUser = async() =>{
+    console.log('FIRED button')
+    try {
+      api.registerUser;
+      console.log('new registration')
+    } catch (error) {
+      console.log('error')
+    }
+  }
+
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
 
       {/*  Site header */}
-      <Header />
+      {/* <Header /> */}
 
       {/*  Page content */}
       <main className="flex-grow">
@@ -46,7 +57,7 @@ function SignUp() {
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full py-4 rounded-lg">Sign up</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full py-4 rounded-lg" onClick={()=> signUpUser()}>Sign up</button>
                     </div>
                   </div>
                   <div className="text-sm text-gray-500 text-center mt-3">
