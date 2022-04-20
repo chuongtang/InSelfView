@@ -9,6 +9,7 @@ import Loader from './Loader';
 
 
 const SignUp = () => {
+// const SignUp = ({ location, history }) => {
 
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,23 +21,25 @@ const SignUp = () => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
+  // const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (userInfo) {
-      history.push(redirect);
+      // history.push(redirect);
+      console.log("user info from useEffect", userInfo)
     }
-  }, [history, userInfo, redirect]);
+  }, []);
+  // }, [history, userInfo, redirect]);
 
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setMessage("Passwords do not match");
+      setMessage("Confirm passwords do not match");
       // set timer to clear message
-      setTimeout(() => {
-        setMessage("");
-      }, 4000);
+      // setTimeout(() => {
+      //   setMessage("");
+      // }, 4000);
     } else {
       dispatch(register(username, email, password));
     }
@@ -59,7 +62,7 @@ const SignUp = () => {
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20 st-header-title">
                 <h2>Thanks for <span>joining</span></h2>
               </div>
-              {message && <Alert variant="warning" children={message} />}
+              {message && <Alert variant="success" children={message} />}
               {error && <Alert variant="error" children={error} />}
               {loading && <Loader />}
               {/* Form */}
