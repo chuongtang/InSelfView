@@ -10,42 +10,6 @@ import {
 
 } from '../constants/reduxConstants'
 
-export const register = (username, email, password) => async (dispatch) => {
-  try {
-    dispatch({
-      type: USER_REGISTER_REQUEST,
-    })
-
-    console.log("log from user actions", api)
-    const user = await api.createAccount(email, password, username);
-    console.log("user after api", user)
-    await api.createSession(email, password);
-
-    dispatch({
-      type: USER_REGISTER_SUCCESS,
-      payload: user,
-    })
-
-    dispatch({
-      type: USER_LOGIN_SUCCESS,
-      payload: data,
-    })
-
-    // store successful Token in localStorage
-    localStorage.setItem('userInfo', JSON.stringify(data))
-  } catch (error) {
-    console.log(error);
-    dispatch({
-      type: USER_REGISTER_FAIL,
-      payload: error.response.data
-      // error.response && error.response.data.message
-      //   ? error
-      //   // ? error.response.data.message
-      //   : error.message,
-    })
-  }
-}
-
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({
@@ -76,6 +40,45 @@ export const login = (email, password) => async (dispatch) => {
   }
 
 }
+
+export const register = (username, email, password) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_REGISTER_REQUEST,
+    })
+
+    console.log("log from user actions", api)
+    const user = await api.createAccount(email, password, username);
+    console.log("user after api", user)
+    await api.createSession(email, password);
+    const data = await api.getAccount();
+
+    dispatch({
+      type: USER_REGISTER_SUCCESS,
+      payload: user,
+    })
+
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data,
+    })
+
+    // // store successful Token in localStorage
+    // localStorage.setItem('userInfo', JSON.stringify(data))
+  } catch (error) {
+    console.log(error.response.message);
+    dispatch({
+      type: USER_REGISTER_FAIL,
+      payload: error.response.data
+      // error.response && error.response.data.message
+      //   ? error
+      //   // ? error.response.data.message
+      //   : error.message,
+    })
+  }
+}
+
+
 
 export const logout = () => (dispatch) => {
   api.deleteCurrentSession()
