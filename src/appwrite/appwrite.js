@@ -15,7 +15,7 @@ let api = {
   },
 
   createAccount: (email, password, name) => {
-    return api.provider().account.create(email, password, name);
+    return api.provider().account.create("unique()",email, password, name);
   },
 
   getAccount: () => {

@@ -16,7 +16,9 @@ export const register = (username, email, password) => async (dispatch) => {
       type: USER_REGISTER_REQUEST,
     })
 
+    console.log("log from user actions", api)
     const user = await api.createAccount(email, password, username);
+    console.log("user after api", user)
     await api.createSession(email, password);
 
     dispatch({
@@ -32,7 +34,7 @@ export const register = (username, email, password) => async (dispatch) => {
     // store successful Token in localStorage
     localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
-    console.log(error.response);
+    console.log(error);
     dispatch({
       type: USER_REGISTER_FAIL,
       payload: error.response.data
