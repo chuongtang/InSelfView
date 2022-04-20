@@ -11,7 +11,7 @@ function SignIn() {
     <div className="flex flex-col min-h-screen overflow-hidden">
 
       {/*  Site header */}
-      {/* <Header /> */}
+      <Header />
 
       {/*  Page content */}
       <main className="flex-grow">
@@ -31,7 +31,7 @@ function SignIn() {
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email</label>
-                      <input id="email" type="email" className="form-input w-full text-gray-800 py-4 rounded-lg" placeholder="Enter your email address" required />
+                      <input id="email" type="email" className="form-input w-full text-gray-800 p-4 rounded-lg" placeholder="Enter your email address" required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">
@@ -40,7 +40,7 @@ function SignIn() {
                         <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password</label>
                         <Link to="/reset-password" className="text-sm font-medium text-blue-600 hover:underline">Having trouble signing in?</Link>
                       </div>
-                      <input id="password" type="password" className="form-input w-full text-gray-800 py-4 rounded-lg" placeholder="Enter your password" required />
+                      <input id="password" type="password" className="form-input w-full text-gray-800 p-4 rounded-lg" placeholder="Enter your password" required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mb-4">

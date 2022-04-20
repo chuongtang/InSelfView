@@ -21,7 +21,7 @@ const SignUp = () => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
-  console.log('userRegister from selector', userRegister)
+  console.log('userRegister from selector', error)
   // const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const SignUp = () => {
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="name">Name <span className="text-red-600">*</span></label>
                       <input id="name" type="text"
-                        className="form-input w-full text-gray-800 py-4 rounded-lg" placeholder="Enter your name"
+                        className="form-input w-full text-gray-800 p-4 rounded-lg" placeholder="Enter your name"
                         required
                         value={username}
                         onChange={(e) => setUserName(e.target.value)} />
@@ -83,7 +83,7 @@ const SignUp = () => {
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email <span className="text-red-600">*</span></label>
                       <input id="email" type="email"
-                        className="form-input w-full text-gray-800 py-4 rounded-lg"
+                        className="form-input w-full text-gray-800 p-4 rounded-lg"
                         placeholder="Enter your email address"
                         required
                         value={email}
@@ -98,7 +98,7 @@ const SignUp = () => {
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="password">Password <span className="text-red-600">*</span></label>
                       <input id="password" type="password"
-                        className="form-input w-full text-gray-800 py-4 rounded-lg" placeholder="Enter your password" required
+                        className="form-input w-full text-gray-800 p-4 rounded-lg" placeholder="Enter your password" required
                         value={password}
                         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
                         title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
@@ -109,7 +109,7 @@ const SignUp = () => {
                     <div className="w-full px-3">
                       <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="confirmPassword">Confirm Password <span className="text-red-600">*</span></label>
                       <input id="confirmPassword" type="password" 
-                      className="form-input w-full text-gray-800 py-4 rounded-lg" placeholder="Confirm your password" required
+                      className="form-input w-full text-gray-800 p-4 rounded-lg" placeholder="Confirm your password" required
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)} />
                     </div>

@@ -47,7 +47,7 @@ export const register = (username, email, password) => async (dispatch) => {
       type: USER_REGISTER_REQUEST,
     })
 
-    console.log("log from user actions", api)
+    // console.log("log from user actions", api)
     const user = await api.createAccount(email, password, username);
     console.log("user after api", user)
     await api.createSession(email, password);
@@ -66,10 +66,10 @@ export const register = (username, email, password) => async (dispatch) => {
     // // store successful Token in localStorage
     // localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
-    console.log(error.response.message);
+    console.log(error.response);
     dispatch({
       type: USER_REGISTER_FAIL,
-      payload: error.response.data
+      payload: error.message
       // error.response && error.response.data.message
       //   ? error
       //   // ? error.response.data.message
@@ -78,12 +78,10 @@ export const register = (username, email, password) => async (dispatch) => {
   }
 }
 
-
-
 export const logout = () => (dispatch) => {
   api.deleteCurrentSession()
   dispatch({ type: USER_LOGOUT })
-  document.location.href = '/login'
+  document.location.href = '/'
 }
 
 
