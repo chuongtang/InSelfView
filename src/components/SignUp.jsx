@@ -41,9 +41,16 @@ const SignUp = () => {
       setTimeout(() => {
         setMessage("");
       }, 3000);
+      // if (error) {
+      //   setMessage(error);
+      //   // set timer to clear message
+      //   setTimeout(() => {
+      //     setMessage("");
+      //   }, 4000);
     } else {
       dispatch(register(username, email, password));
     }
+  
   };
 
   return (
@@ -63,7 +70,7 @@ const SignUp = () => {
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20 st-header-title">
                 <h2>Thanks for <span>joining</span></h2>
               </div>
-              {message && <Alert variant="error" children={message} />}
+              {message && <Alert variant="warning" children={message} />}
               {error && <Alert variant="error" children={error} />}
               {loading && <Loader />}
               {/* Form */}
