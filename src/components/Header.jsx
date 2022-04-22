@@ -25,10 +25,10 @@ function Header() {
   }, [top]);
 
   return (
-    <header className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && 'bg-white backdrop-blur-sm shadow-lg'}`}>
-      <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <header className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${!top && 'bg-green-100 backdrop-blur-sm shadow-lg'}`}>
+      <div className="container mx-auto flex flex-wrap p-2 flex-col md:flex-row items-center">
         {/* InSelfVIew SVG Logo ⬇ */}
-        <Link to="/" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <Link to="/" className="flex title-font font-medium  items-center text-gray-900 mb-4 md:mb-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
