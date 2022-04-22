@@ -4,7 +4,7 @@ import api from '../appwrite/appwrite'
 import { useDispatch, useSelector } from "react-redux";
 import Header from './Header';
 import { register } from "../actions/userActions";
-import Alert from './Alert';
+import AlertMsg from './Alert';
 import Loader from './Loader';
 
 
@@ -38,9 +38,9 @@ const SignUp = () => {
     if (password !== confirmPassword) {
       setMessage("Confirm passwords do not match");
       // set timer to clear message
-      setTimeout(() => {
-        setMessage("");
-      }, 3000);
+      // setTimeout(() => {
+      //   setMessage("");
+      // }, 3000);
       // if (error) {
       //   setMessage(error);
       //   // set timer to clear message
@@ -70,8 +70,8 @@ const SignUp = () => {
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20 st-header-title">
                 <h2>Thanks for <span>joining</span></h2>
               </div>
-              {message && <Alert variant="warning" children={message} />}
-              {error && <Alert variant="error" children={error} />}
+              {message && <AlertMsg type="warning" message={message} />}
+              {error && <AlertMsg type="danger" message={error} />}
               {loading && <Loader />}
               
               {/* Form */}
