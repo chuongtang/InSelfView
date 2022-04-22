@@ -17,10 +17,10 @@ const Slider = ({ timer, handleTimer }) => {
         value={timer}
         onChange={handleTimer}
         step={0.5}
-        className="w-sm"
+        className="w-full"
       >
         </input>
-      <div className="mb-8"> Set timer ⏱️: {timer} minutes</div>
+      <div> Set timer ⏱️: {timer} minutes</div>
     </div>
   );
 }

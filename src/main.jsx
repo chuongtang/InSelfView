@@ -10,12 +10,12 @@ import { Windmill } from '@windmill/react-ui';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Windmill>
-      <Provider store={store}>
-        <Router>
+    <Provider store={store}>
+      <Router>
+        <Windmill>
           <App />
-        </Router>
-      </Provider>
-    </Windmill>,
+        </Windmill>,
+      </Router>
+    </Provider>
   </React.StrictMode>
 )
