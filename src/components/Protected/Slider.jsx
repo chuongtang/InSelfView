@@ -7,19 +7,20 @@ const Slider = ({ timer, handleTimer }) => {
     justifyContent: 'center'
   };
   return (
-    
-    <div >
+
+    <div className="w-full m-2 justify-center font-mono text-lg">
       <input
         type="range"
+        list="tickmarks"
         min={0}
         max={5}
         value={timer}
         onChange={handleTimer}
         step={0.5}
-        className="slider"
-        style={styleObj}
-      ></input>
-      <div style={styleObj} > Set recording ⏱️: {timer} minutes</div>
+        className="w-full"
+      >
+        </input>
+      <div> Set timer ⏱️: {timer} minutes</div>
     </div>
   );
 }

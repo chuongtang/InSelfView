@@ -73,6 +73,7 @@ const SignUp = () => {
               {message && <Alert variant="warning" children={message} />}
               {error && <Alert variant="error" children={error} />}
               {loading && <Loader />}
+              
               {/* Form */}
               <div className="max-w-sm mx-auto">
                 <form onSubmit={submitHandler}>
