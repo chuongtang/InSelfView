@@ -7,7 +7,7 @@ function ResetPassword() {
     <div className="flex flex-col min-h-screen overflow-hidden">
 
       {/*  Site header */}
-      {/* <Header /> */}
+      <Header />
 
       {/*  Page content */}
       <main className="flex-grow">
@@ -24,16 +24,24 @@ function ResetPassword() {
 
               {/* Form */}
               <div className="max-w-sm mx-auto">
-                <form>
+                <form className="text-base">
                   <div className="flex flex-wrap -mx-3 mb-4">
                     <div className="w-full px-3">
-                      <label className="block text-gray-800 text-sm font-medium mb-1" htmlFor="email">Email <span className="text-red-600">*</span></label>
+                      <label className="block text-gray-800 font-medium mb-4" htmlFor="email">Email <span className="text-red-600">*</span></label>
                       <input id="email" type="email" className="form-input w-full text-gray-800 py-4 rounded-lg" placeholder="Enter your email address" required />
                     </div>
                   </div>
                   <div className="flex flex-wrap -mx-3 mt-6">
                     <div className="w-full px-3">
-                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full py-4 rounded-lg">Send reset link</button>
+                      <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full py-4 rounded-lg flex justify-center">Send reset link
+                        <svg width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-4">
+                          <path d="M21 13V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V14C3 15.1046 3.89543 16 5 16H12" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M14.5 18.5L16.5 20.5L20.5 16.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M12 11.01L12.01 10.9989" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M16 11.01L16.01 10.9989" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M8 11.01L8.01 10.9989" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </button>
                     </div>
                   </div>
                 </form>
