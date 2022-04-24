@@ -39,15 +39,9 @@ const SignUp = () => {
     if (password !== confirmPassword) {
       setMessage("Confirm passwords do not match");
       // set timer to clear message
-      // setTimeout(() => {
-      //   setMessage("");
-      // }, 3000);
-      // if (error) {
-      //   setMessage(error);
-      //   // set timer to clear message
-      //   setTimeout(() => {
-      //     setMessage("");
-      //   }, 4000);
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
     } else {
       dispatch(register(username, email, password));
     }
@@ -56,17 +50,11 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
-
       {/*  Site header */}
       <Header />
-
       {/*  Page content */}
-      <main className="">
-
         <section className="bg-gradient-to-b from-gray-100 to-white">
-
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-
             <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mt-14">
               <div className="md:flex">
                 <div className="md:shrink-0">
@@ -126,7 +114,7 @@ const SignUp = () => {
                       </div>
                       <div className="flex flex-wrap -mx-3 mt-6">
                         <div className="w-full px-3">
-                          <button className="btn text-white bg-blue-600 hover:bg-blue-700 w-full py-4 rounded-lg" type="submit">Sign up</button>
+                          <button className="btn text-white bg-green-600 hover:bg-yellow-500 w-full py-4 rounded-lg" type="submit">Sign up</button>
                         </div>
                       </div>
                       <div className="text-sm text-gray-500 text-center mt-3">
@@ -159,7 +147,6 @@ const SignUp = () => {
             </div>
           </div>
         </section>
-      </main>
     </div>
   );
 }
