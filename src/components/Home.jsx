@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import Header from './Header'
-
+import {useTypingText} from './TypingTexts/useTypingTexts'
 
 
 
 const Home = () => {
+
+  const { word, stop, start } = useTypingText(
+    ["jobseekers", "talent-hunters", "recruiters"],
+    130,
+    20
+  );
 
   return (
     <div>
@@ -14,9 +20,10 @@ const Home = () => {
         <div className="">
           <div className="row">
             <div className="col-md-12 text-center st-header-content">
-              <div className="st-header-title">
+              <div className="st-header-title pt-14">
                 <h2>Welcome to <span>InSelfView</span></h2>
-                <p className="text-xl st-header-p">An online platform to practice your virtual interview<br /> Connect to a community of suportive jobseekers</p>
+                <p className="text-xl st-header-p px-2">An online platform to practice your virtual interview<br /> Connect to a community of suportive {word}</p>
+                
               </div>
             </div>
           </div>
@@ -75,7 +82,7 @@ const Home = () => {
             <div className="xl:w-1/3 md:w-1/2 p-4">
               <div className="border border-gray-200 p-6 rounded-lg">
                 <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-red-200 text-indigo-500 mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none"><path d="M2 16V8a6 6 0 0 1 6-6h8a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6H8a6 6 0 0 1-6-6z" stroke="currentColor" /><path d="M6 13v-2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z" stroke="currentColor" /><path d="m17.04 9.22-3.067 2.3a.6.6 0 0 0 0 .96l3.067 2.3a.6.6 0 0 0 .96-.48V9.7a.6.6 0 0 0-.96-.48z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"  /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none"><path d="M2 16V8a6 6 0 0 1 6-6h8a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6H8a6 6 0 0 1-6-6z" stroke="currentColor" /><path d="M6 13v-2a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z" stroke="currentColor" /><path d="m17.04 9.22-3.067 2.3a.6.6 0 0 0 0 .96l3.067 2.3a.6.6 0 0 0 .96-.48V9.7a.6.6 0 0 0-.96-.48z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </div>
                 <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Watch and Learn</h2>
                 <p className="leading-relaxed text-base">A safe environment to learn from others who have mastered their presentations.</p>
