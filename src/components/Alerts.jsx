@@ -1,5 +1,7 @@
 import React from 'react'
 
+// Try several ways, nothing works, 😪😭 not able render taliwind classes dynamically so I had to create 3 types
+
 export const AlertInfo = ({ message }) => {
   return (
     <div className="bg-blue-100 rounded-lg py-5 px-6 mb-3 text-base text-blue-700 inline-flex items-center w-full" role="alert">

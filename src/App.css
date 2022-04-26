@@ -134,7 +134,7 @@ h1 {
 } */
 
 .word span {
-  color: #fb3640;
+  color: #6366f1;
   font-weight: bold;
   position: relative;
 }
@@ -143,7 +143,7 @@ h1 {
   content: "";
   width: 8px;
   height: 100%;
-  background: #6366f1;
+  background: #fb3640;
   display: block;
   position: absolute;
   right: -10px;

@@ -15,10 +15,10 @@ export const useTypingText = (words, keySpeed = 1000, maxPauseAmount = 10) => {
   const typingInterval = useRef();
   const letterIndex = useRef();
 
-  const stop = () => {
-    clearInterval(typingInterval.current);
-    setIsStopped(true);
-  };
+  // const stop = () => {
+  //   clearInterval(typingInterval.current);
+  //   setIsStopped(true);
+  // };
 
   useEffect(() => {
     // Start at 0

@@ -78,7 +78,7 @@ const Recorder = () => {
     <div >
 
       <div className="flex mt-9">
-        <Webcam audio={true} ref={webcamRef} className="ml-8" />
+        <Webcam audio={false} ref={webcamRef} className="ml-8" />
         <div className="ml-8">
           <Slider
             timer={timer}

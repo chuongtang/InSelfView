@@ -22,7 +22,7 @@ const Home = () => {
             <div className="col-md-12 text-center st-header-content">
               <div className="st-header-title pt-14">
                 <h2>Welcome to <span>InSelfView</span></h2>
-                <p className="text-xl st-header-p px-2">An online platform to practice your virtual interview<br /> Connect to a community of suportive {word}</p>
+                <p className="text-xl st-header-p px-2">An online platform to practice your virtual interview<br /> Connect to a community of supportive {word}</p>
                 
               </div>
             </div>
