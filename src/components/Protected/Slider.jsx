@@ -16,11 +16,11 @@ const Slider = ({ timer, handleTimer }) => {
         max={5}
         value={timer}
         onChange={handleTimer}
-        step={0.5}
+        step={1}
         className="w-full"
       >
         </input>
-      <div> Set timer ⏱️: {timer} minutes</div>
+      <div> Auto stop in: 0{timer} minutes</div>
     </div>
   );
 }
