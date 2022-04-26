@@ -18,8 +18,8 @@ function SignIn() {
   const [message, setMessage] = useState(null);
   const dispatch = useDispatch();
 
-  const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, userInfo } = userRegister;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -75,7 +75,7 @@ function SignIn() {
                       <div className="w-full px-3">
                         <button className="btn px-0 text-white bg-yellow-500 hover:bg-green-400 w-full relative flex items-center py-4 rounded-lg" type="submit">
                           <svg className="w-6 h-6 fill-current text-white flex-shrink-0 mx-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 12H17.4C17.7314 12 18 12.2686 18 12.6V19.4C18 19.7314 17.7314 20 17.4 20H6.6C6.26863 20 6 19.7314 6 19.4V12.6C6 12.2686 6.26863 12 6.6 12H8M16 12V8C16 6.66667 15.2 4 12 4C8.8 4 8 6.66667 8 8V12M16 12H8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M16 12H17.4C17.7314 12 18 12.2686 18 12.6V19.4C18 19.7314 17.7314 20 17.4 20H6.6C6.26863 20 6 19.7314 6 19.4V12.6C6 12.2686 6.26863 12 6.6 12H8M16 12V8C16 6.66667 15.2 4 12 4C8.8 4 8 6.66667 8 8V12M16 12H8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                           <span className="flex-auto pl-16 pr-8 -ml-16">Sign in</span>
                         </button>

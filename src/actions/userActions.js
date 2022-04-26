@@ -18,7 +18,7 @@ export const login = (email, password) => async (dispatch) => {
 
     await api.createSession(email, password);
     const data = await api.getAccount();
-    
+    console.log("Data from login", data)
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
@@ -29,14 +29,14 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload: error.response.data
+      payload: error.response.message
       // payload: error.response && error.response.data.message
       // // payload: error
       //     ? error.response.data
       //     // ? error
       //     : error.message,
     });
-    console.log('error is', error.response.data);
+    console.log('error is', error.response.message);
   }
 
 }
@@ -80,7 +80,10 @@ export const register = (username, email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   api.deleteCurrentSession()
+  localStorage.removeItem('userInfo')
   dispatch({ type: USER_LOGOUT })
+  dispatch({ type: USER_DETAILS_RESET })
+  dispatch({ type: USER_LIST_RESET })
   document.location.href = '/'
 }
 
