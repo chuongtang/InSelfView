@@ -6,6 +6,8 @@ import Recorder from './components/Protected/Recorder'
 import ResetPassword from './components/ResetPassword'
 import { Routes, Route} from 'react-router-dom';
 
+import Questions from './components/Protected/Questions'
+
 const App = ()=> {
   
   return (
@@ -16,6 +18,7 @@ const App = ()=> {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/recorder" element={<Recorder />} />
         <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/question" element={<Questions />} />
       </Routes>
     </>
   )
