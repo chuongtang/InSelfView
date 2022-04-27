@@ -23,15 +23,14 @@ const SignUp = () => {
   const { loading, error, userInfo } = userRegister;
 
   console.log('userRegister from selector', error)
-  // const redirect = location.search ? location.search.split("=")[1] : "/";
+  
 
   useEffect(() => {
     if (userInfo) {
-      // history.push(redirect);
       console.log("user info from useEffect***", userInfo)
     }
   }, [userInfo]);
-  // }, [history, userInfo, redirect]);
+ 
 
 
   const submitHandler = (e) => {
@@ -114,14 +113,14 @@ const SignUp = () => {
                       </div>
                       <div className="flex flex-wrap -mx-3 mt-6">
                         <div className="w-full px-3">
-                          <button className="btn text-white bg-green-600 hover:bg-yellow-500 w-full py-4 rounded-lg" type="submit">Sign up</button>
+                          <button className="btn text-white bg-gray-400 hover:bg-yellow-500 w-full py-4 rounded-lg" type="submit">Sign up</button>
                         </div>
                       </div>
                       <div className="text-sm text-gray-500 text-center mt-3">
                         By creating an account, you agree to the <a className="underline" href="#0">terms & conditions</a>, and our <a className="underline" href="#0">privacy policy</a>.
                       </div>
                     </form>
-                    <div className="flex items-center my-6">
+                    {/* <div className="flex items-center my-6">
                       <div className="border-t border-gray-300 flex-grow mr-3" aria-hidden="true"></div>
                       <div className="text-gray-600 italic">Or</div>
                       <div className="border-t border-gray-300 flex-grow ml-3" aria-hidden="true"></div>
@@ -137,7 +136,7 @@ const SignUp = () => {
                           </button>
                         </div>
                       </div>
-                    </form>
+                    </form> */}
                     <div className="text-gray-600 text-center mt-6">
                       Already using InSelfView? <Link to="/signin" className="text-blue-600 hover:underline transition duration-150 ease-in-out">Sign in</Link>
                     </div>

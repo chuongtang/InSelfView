@@ -25,6 +25,9 @@ let api = {
   createSession: (email, password) => {
     return api.provider().account.createSession(email, password);
   },
+  getSession: () => {
+    return api.provider().account.getSessions();
+  },
 
   deleteCurrentSession: () => {
     return api.provider().account.deleteSession('current');

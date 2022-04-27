@@ -4,6 +4,11 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+
+  // USER_LOGINGH_FAIL,
+  // USER_LOGINGH_REQUEST,
+  // USER_LOGINGH_SUCCESS,
+  
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -82,10 +87,40 @@ export const logout = () => (dispatch) => {
   api.deleteCurrentSession()
   localStorage.removeItem('userInfo')
   dispatch({ type: USER_LOGOUT })
-  dispatch({ type: USER_DETAILS_RESET })
-  dispatch({ type: USER_LIST_RESET })
   document.location.href = '/'
 }
 
+// export const loginGithub =() => async (dispatch) => {
+//   try {
+//     dispatch({
+//       type: USER_LOGINGH_REQUEST,
+//     })
 
+//     await api.provider().account.createOAuth2Session(
+//       "github",
+//       "http://localhost:3000",
+//       "http://localhost:3000/signin"
+//     );
+//     const data = await api.getSession();
+//     console.log("Data from loginGITHUB", data)
+
+//     dispatch({
+//       type: USER_LOGINGH_SUCCESS,
+//       payload: data,
+//     })
+
+//     localStorage.setItem('userInfo', JSON.stringify(data))
+//   } catch (error) {
+//     dispatch({
+//       type: USER_LOGINGH_FAIL,
+//       payload: error.response.message
+//       // payload: error.response && error.response.data.message
+//       // // payload: error
+//       //     ? error.response.data
+//       //     // ? error
+//       //     : error.message,
+//     });
+//     console.log('error is==>', error.response);
+//   }
+// }
 
