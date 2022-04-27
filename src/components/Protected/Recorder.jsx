@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 import Slider from "./Slider";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from '@windmill/react-ui'
@@ -12,14 +12,14 @@ const Recorder = () => {
   };
 
   // Webcam npm
-  const webcamRef = React.useRef(null);
-  const mediaRecorderRef = React.useRef(null);
-  const [capturing, setCapturing] = React.useState(false);
-  const [preview, setPreview] = React.useState(false);
-  const [recordedChunks, setRecordedChunks] = React.useState([]);
+  const webcamRef = useRef(null);
+  const mediaRecorderRef = useRef(null);
+  const [capturing, setCapturing] = useState(false);
+  const [preview, setPreview] = useState(false);
+  const [recordedChunks, setRecordedChunks] = useState([]);
 
   // Handling data
-  const handleDataAvailable = React.useCallback(
+  const handleDataAvailable = useCallback(
     ({ data }) => {
       if (data.size > 0) {
         setRecordedChunks((prev) => prev.concat(data));
@@ -69,24 +69,19 @@ const Recorder = () => {
     }
   }, [recordedChunks]);
 
-  const closeModal = () => {
-    document.getElementById("previewModal").style.display = "none";
-    setPreview(false);
-  };
-
   return (
     <div>
-      <div class="max-w-md mx-auto mt-4 bg-white rounded-xl shadow-xl overflow-hidden md:max-w-2xl">
-        <div class="md:flex">
-          <div class="md:shrink-0 rounded-lg p-4">
+      <div className="max-w-md mx-auto mt-4 bg-white rounded-xl shadow-xl overflow-hidden md:max-w-2xl">
+        <div className="md:flex">
+          <div className="md:shrink-0 rounded-lg p-4">
             <Webcam audio={false} ref={webcamRef} className="py-4" />
           </div>
-          <div class="p-8">
-            <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold"> <Slider
+          <div className="p-8">
+            <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold"> <Slider
               timer={timer}
               handleTimer={handleTimer}
             /></div>
-            <div class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{capturing ? (
+            <div className="block mt-1 text-lg leading-tight font-medium text-black">{capturing ? (
               <button
                 className="flex bg-red-700 hover:bg-red-300 text-sm md:text-lg text-white text-center p-2 rounded"
                 onClick={handleStopCaptureClick}
@@ -108,7 +103,7 @@ const Recorder = () => {
                 Start Recording
               </button>
             )}</div>
-            <div class="mt-2 text-slate-500">{recordedChunks.length > 0 && (
+            <div className="mt-2 text-slate-500">{recordedChunks.length > 0 && (
               <div className="d-flex">
                 <button
                   className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded"
@@ -120,10 +115,12 @@ const Recorder = () => {
                   </svg>
                   Download
                 </button>
-                <button type="button"
-                  class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                  data-bs-toggle="modal" data-bs-target="#videoModalFullscreen">
-                  PreView VIDeo
+                <button className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                  onClick={() => {
+                    console.log("OREVIREW clicked")
+                    setPreview(true)
+                    console.log(preview)}}>
+                  PreView VIDeo HERE
                 </button>
                 {/* <button
                   className="flex bg-transparent border border-yellow-500 text-sm md:text-lg text-yellow-500 hover:bg-yellow-500 hover:text-white text-center py-2 px-4 rounded"
@@ -142,50 +139,46 @@ const Recorder = () => {
           </div>
         </div>
       </div>
-
-      <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-        id="videoModalFullscreen" tabindex="-1" aria-labelledby="videoModalFullscreenLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen relative w-auto pointer-events-none">
-          <div
-            class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+      {/* ⬇ Toggle modal to preview recording */}
+      {preview &&
+        (<div className="modal fade fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto">
+          <div className="modal-dialog modal-fullscreen relative w-auto pointer-events-none mx-2">
             <div
-              class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-              <h5 class="text-xl font-medium leading-normal text-gray-800" id="videoModalFullscreenLabel">
-                Preview your recording
-              </h5>
-              <button type="button"
-                class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
-                data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body relative p-4">
-              <video controls>
-                <source
-                  src={URL.createObjectURL(
-                    new Blob(recordedChunks, { type: "video/webm" })
-                  )}
-                  type="video/webm"
-                />
-              </video>
-            </div>
-            <div class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-              <button type="button" class="inline-block px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
-                data-bs-dismiss="modal">
-                Close
-              </button>
-              <button
-                className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded"
-                onClick={handleDownload}
-              >
-                <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
-                  <path d="M12 13V22M12 22L15.5 18.5M12 22L8.5 18.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                Download
-              </button>
+              className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current py-14">
+              <div
+                className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                <h5 className="text-xl font-medium leading-normal text-yellow-500 mx-auto" id="videoModalFullscreenLabel">
+                  Preview your recording
+                </h5>
+              </div>
+              <div className="modal-body relative p-2">
+                <video className="h-lg w-auto mx-auto rounded-lg" controls>
+                  <source
+                    src={URL.createObjectURL(
+                      new Blob(recordedChunks, { type: "video/webm" })
+                    )}
+                    type="video/webm"
+                  />
+                </video>
+              </div>
+              <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
+                <button className="flex bg-transparent border border-red-400 text-sm md:text-lg text-red-400 hover:bg-red-400 hover:text-white text-center p-2 my-4 rounded-lg mr-4" onClick={() => setPreview(false)}>
+                  X Close
+                </button>
+                <button
+                  className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded-lg"
+                  onClick={handleDownload}
+                >
+                  <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
+                    <path d="M12 13V22M12 22L15.5 18.5M12 22L8.5 18.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  Download
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div>)}
     </div>
   );
 };
