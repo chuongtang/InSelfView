@@ -18,7 +18,7 @@ function ResetPassword() {
 
               {/* Page header */}
               <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20 st-header-title">
-                <h2>Reset your password</h2>
+                <h2 className="text-lg">Reset your password</h2>
                 <span className="text-xl text-green-600">Enter the email address you used when you signed up for your account, and we’ll email you a link to reset your password.</span>
               </div>
 

@@ -70,16 +70,14 @@ function SignIn() {
                     <div>
                       <div className="flex items-center justify-between">
                         <label htmlFor="pwd" className="text-gray-700">Password</label>
-                        <button className="p-2 -mr-2" type="reset">
+                        <Link to="/reset-password" className="p-2 -mr-2" type="reset">
                           <span className="text-sm text-sky-500">Forgot your password ?</span>
-                        </button>
+                        </Link>
                       </div>
                       <input type="password" name="pwd" id="pwd"
                         className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
                             focus:ring-2 focus:ring-sky-300 focus:outline-none invalid:ring-2 invalid:ring-red-400"
                         value={password}
-                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-                        title="Must contain at least one  number and one uppercase and lowercase letter, and at least 6 or more characters"
                         autoComplete="your current password"
                         onChange={(e) => setPassword(e.target.value)}/>
                     </div>
@@ -91,7 +89,7 @@ function SignIn() {
 
                     <p className="border-t pt-6 text-sm">
                       Don't have an account ?
-                      <a href="#" className="text-sky-500">Sign up</a>
+                      <a href="/signup" className="text-sky-500 ml-4">Sign up</a>
                     </p>
                   </form>
                 </div>
