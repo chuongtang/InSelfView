@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 import Slider from "./Slider";
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from '@windmill/react-ui'
 
 
 

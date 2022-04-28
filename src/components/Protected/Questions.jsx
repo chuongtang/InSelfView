@@ -61,16 +61,16 @@ const Questions = () => {
             stroke="currentColor"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="3"
               d="M17 8l4 4m0 0l-4 4m4-4H3"
             />
           </svg>
         </span>
       </button>
-      <blockquote className="mx-auto text-gray-500 text-shadow-lg text-base"> 
-      {question} 
+      <blockquote className="mx-auto text-gray-500 text-shadow-lg text-base">
+        {question}
       </blockquote>
     </div>
   )
