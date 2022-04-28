@@ -15,7 +15,7 @@ const ProtectedPage = () => {
   return (
     <div>
       <Header />
-      <h1>{userInfo}</h1>
+      {/* <h1>{userInfo}</h1> */}
       <p>hosfojrfoijrfoaijerfoieajfroeiaj</p>
       <Recorder />
       <Questions />
