@@ -1,4 +1,5 @@
 html {
+  Overflow-y:scroll;
   scroll-behavior: smooth;
 }
 
