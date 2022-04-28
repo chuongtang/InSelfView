@@ -1,9 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import questionsList from "./questionBank.json";
 // import { Button, Container, Form } from "react-bootstrap";
 
 const Questions = () => {
-  const [category, setCategory] = useState("Select question Category for recording");
+  const [category, setCategory] = useState("");
   const [question, setQuestion] = useState("");
 
   const handleChangeQues = (event) => {
@@ -13,47 +13,66 @@ const Questions = () => {
   const RandArray = (array) => array[(Math.random() * array.length) | 0];
 
   const random_question = () => {
-    if (category === "Select question Category for recording") {
+    if (category === "") {
       return (
-        <div class="alert alert-secondary alert-dismissible fade show">
-                   Please select a category prior to generating questions.
+        <div
+          className="p-4 text-red-700 border rounded border-red-900/10 bg-red-50"
+          role="alert"
+        >
+          <strong className="text-sm font-medium"> Please select a Category </strong>
         </div>
-      );
-
-      // return alert("Please select a category 👇");
+      )
     } else {
-      let randomly_generated_question = RandArray(questions[category]);
+      let randomly_generated_question = RandArray(questionsList[category]);
       return randomly_generated_question;
     }
   };
 
-  const QuestionStyle = {
-    fontStyle: "italic",
-    fontSize: "1.25rem",
-    color: "black",
-    textShadow: "0.05rem 0.05rem grey",
-  };
 
   return (
-    <div style={{ width: "inherit" }}>
-      <form.Select
+    <div className="text-base sm:text-3xl" >
+      <select
         value={category}
         onChange={(e) => {
           setCategory(e.target.value);
         }}
         aria-label="Default select example"
+        className="mx-auto mt-4 text-gray-500 text-base bg-blue-100 rounded-xl"
       >
-        <option>Select question Category for recording</option>
+        <option>Select Category for random questions</option>
         {Object.keys(questionsList).map((category) => (
-          <option value={category}>{category}</option>
+          <option value={category} key={category}>{category}</option>
         ))}
-      </form.Select>
+      </select>
 
-      <button  className="my-4" variant="secondary" onClick={handleChangeQues}>
-        Generate Random Questions
+      <button className="flex items-center justify-between p-2 my-8 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 group" onClick={handleChangeQues}>
+        <span className="text-base font-medium group-hover:text-white">
+          Generate random question
+        </span>
+
+        <span
+          className="flex-shrink-0 p-2 ml-4 bg-white border border-blue-600 rounded-full"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-3 h-3"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </span>
       </button>
-      <div style={QuestionStyle}> {question} </div>
+      <blockquote className="mx-auto text-gray-500 text-shadow-lg text-base"> 
+      {question} 
+      </blockquote>
     </div>
-  );
-};
+  )
+}
 export default Questions;
