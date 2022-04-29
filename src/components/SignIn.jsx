@@ -39,7 +39,7 @@ function SignIn() {
         <div className="relative container m-auto px-6 text-gray-500 md:px-12 xl:px-40">
 
           <div className="m-auto space-y-8 md:w-8/12 lg:w-full">
-         
+
             <img src={Logo} loading="lazy" className="w-48 ml-4" alt="inselfView logo" />
             <div className="rounded-xl border bg-opacity-50 backdrop-blur-2xl bg-white shadow-xl">
               <div className="lg:grid lg:grid-cols-2">
@@ -47,7 +47,7 @@ function SignIn() {
                   <img src={SIImg} className="rounded-l-xl object-cover" loading="lazy" height="" width="" alt="Key board" />
                 </div>
                 <div className="p-6 sm:p-16">
-               
+
                   <h2 className="flex mb-8 text-2xl text-cyan-900 font-bold">Sign in to your account</h2>
                   {message && <AlertWarning message={message} />}
                   {error && <AlertError message={error} />}
@@ -56,7 +56,7 @@ function SignIn() {
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-gray-700">Email</label>
                       <input type="email" name="email" id="email"
-                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-sky-300 focus:outline-none invalid:ring-2 invalid:ring-red-400"
+                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-sky-300 focus:outline-none invalid:ring-1 invalid:ring-red-400"
                         placeholder="Enter your email address"
                         required
                         value={email}
@@ -64,22 +64,19 @@ function SignIn() {
                           !e.target.value.indexOf(".") <= 0
                             ? setEmail(e.target.value)
                             : setEmail("");
-                        }}/>
+                        }} />
                     </div>
 
                     <div>
-                      <div className="flex items-center justify-between">
-                        <label htmlFor="pwd" className="text-gray-700">Password</label>
-                        <Link to="/reset-password" className="p-2 -mr-2" type="reset">
-                          <span className="text-sm text-sky-500">Forgot your password ?</span>
-                        </Link>
-                      </div>
-                      <input type="password" name="pwd" id="pwd"
+                      <label htmlFor="pwd" className="text-gray-700">Password</label>
+                      <input type="password" name="pwd" id="password"
                         className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
-                            focus:ring-2 focus:ring-sky-300 focus:outline-none invalid:ring-2 invalid:ring-red-400"
+                            focus:ring-2 focus:ring-sky-300 focus:outline-none invalid:ring-1 invalid:ring-red-400"
                         value={password}
+                        placeholder="Enter your password"
+                        required
                         autoComplete="your current password"
-                        onChange={(e) => setPassword(e.target.value)}/>
+                        onChange={(e) => setPassword(e.target.value)} />
                     </div>
 
                     <button type="submit"

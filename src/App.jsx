@@ -5,7 +5,7 @@ import SignUp from './components/SignUp'
 import Recorder from './components/Protected/Recorder'
 import ResetPassword from './components/ResetPassword'
 import { Routes, Route} from 'react-router-dom';
-import ProtectedPage from './components/Protected/ProtectedPage'
+import MainScreen from './components/Protected/MainScreen'
 
 import Questions from './components/Protected/Questions'
 
@@ -20,7 +20,7 @@ const App = ()=> {
         <Route path="/recorder" element={<Recorder />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/question" element={<Questions />} />
-        <Route path="/in" element={<ProtectedPage />} />
+        <Route path="/in" element={<MainScreen />} />
       </Routes>
     </>
   )

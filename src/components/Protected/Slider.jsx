@@ -1,14 +1,10 @@
 import React from 'react'
 
 const Slider = ({ timer, handleTimer }) => {
-  const styleObj = {
-    width: "20rem",
-    margin: '0.5rem',
-    justifyContent: 'center'
-  };
+
   return (
 
-    <div className="w-full m-2 justify-center font-mono text-lg">
+    <div className="w-full justify-center font-mono text-lg">
       <input
         type="range"
         list="tickmarks"
@@ -17,10 +13,10 @@ const Slider = ({ timer, handleTimer }) => {
         value={timer}
         onChange={handleTimer}
         step={1}
-        className="w-full"
+        className="w-full mt-12"
       >
         </input>
-      <div> Auto stop in: 0{timer} minutes</div>
+      <div> Time for answeing: 0{timer} minutes</div>
     </div>
   );
 }

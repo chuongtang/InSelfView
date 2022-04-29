@@ -30,47 +30,26 @@ const Questions = () => {
 
 
   return (
-    <div className="text-base sm:text-3xl" >
+    <div className="my-8 text-gray-600" >
       <select
         value={category}
         onChange={(e) => {
           setCategory(e.target.value);
         }}
         aria-label="Default select example"
-        className="mx-auto mt-4 text-gray-500 text-base bg-blue-100 rounded-xl"
+        className="mx-auto mt-4 p-4 text-gray-500 text-base bg-gray-200 rounded-lg"
       >
-        <option>Select Category for random questions</option>
+        <option>Select Category for mock interview</option>
         {Object.keys(questionsList).map((category) => (
           <option value={category} key={category}>{category}</option>
         ))}
       </select>
-
-      <button className="flex items-center justify-between p-2 my-8 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-600 group" onClick={handleChangeQues}>
-        <span className="text-base font-medium group-hover:text-white">
-          Generate random question
-        </span>
-
-        <span
-          className="flex-shrink-0 p-2 ml-4 bg-white border border-blue-600 rounded-full"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-3 h-3"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="3"
-              d="M17 8l4 4m0 0l-4 4m4-4H3"
-            />
-          </svg>
-        </span>
+      <button class="block w-full mt-6 mb-16 py-3 px-6 text-center rounded-xl transition bg-blue-200 hover:bg-blue-100 active:bg-blue-300 focus:bg-blue-100 sm:w-max" onClick={handleChangeQues}>       
+          Generate random question 
       </button>
+    
       <blockquote className="mx-auto text-gray-500 text-shadow-lg text-base">
-        {question}
+        "{question}"
       </blockquote>
     </div>
   )
