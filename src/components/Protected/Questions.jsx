@@ -51,6 +51,7 @@ const Questions = () => {
       <blockquote className="mx-auto text-gray-500 text-shadow-lg text-base">
         {question}
       </blockquote>
+  
     </div>
   )
 }

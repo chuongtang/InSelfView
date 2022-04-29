@@ -16,7 +16,7 @@ const Slider = ({ timer, handleTimer }) => {
         className="w-full mt-12"
       >
         </input>
-      <div> Time for answeing: 0{timer} minutes</div>
+      <div> Time for answering: 0{timer} minutes</div>
     </div>
   );
 }

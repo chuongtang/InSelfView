@@ -65,6 +65,7 @@ function Header() {
           ) : (
             <div className="flex flex-grow justify-end flex-wrap items-center">
               <p className="font-mono font-medium text-shadow-lg text-stroke-sm">Welcome {userInfo.name}</p>
+              
               <button to="/signup" className="flex bg-blue-500 hover:bg-red-500 text-white text-center py-2 px-4 rounded ml-3" onClick={logoutHandler}>
                 Log out
                 <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-2">
