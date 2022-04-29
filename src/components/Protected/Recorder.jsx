@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import Webcam from "react-webcam";
 import Slider from "./Slider";
+import Questions from './Questions'
 
 
 
@@ -27,7 +28,7 @@ const Recorder = () => {
     [setRecordedChunks]
   );
 
-  const handleStartCaptureClick = React.useCallback(() => {
+  const handleStartCaptureClick = useCallback(() => {
     setCapturing(true);
     console.log("Timer in recording button:", timer);
     setTimeout(handleStopCaptureClick, timer * 60000);
@@ -42,7 +43,7 @@ const Recorder = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleDataAvailable, timer]);
 
-  const handleStopCaptureClick = React.useCallback(() => {
+  const handleStopCaptureClick = useCallback(() => {
     if (mediaRecorderRef.current.state === "inactive") {
       setCapturing(false);
     } else {
@@ -51,7 +52,7 @@ const Recorder = () => {
     setCapturing(false);
   }, [mediaRecorderRef, setCapturing]);
 
-  const handleDownload = React.useCallback(() => {
+  const handleDownload = useCallback(() => {
     if (recordedChunks.length) {
       const blob = new Blob(recordedChunks, {
         type: "video/webm",
@@ -69,19 +70,28 @@ const Recorder = () => {
   }, [recordedChunks]);
 
   return (
-    <div>
-      <div className="max-w-md mx-auto mt-4 bg-white rounded-xl shadow-xl overflow-hidden md:max-w-2xl">
-        <div className="md:flex">
-          <div className="md:shrink-0 rounded-lg p-4">
-            <Webcam audio={false} ref={webcamRef} className="py-4" />
+    <div className="py-16 bg-gradient-to-br from-blue-50 to-blue-100">
+      <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
+        <div className="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
+          <div className="space-y-6 md:7/12 lg:w-6/12">
+            <h2 className="text-2xl text-blue-900 font-bold md:text-5xl">Practice makes perfect</h2>
+            <div className="space-y-4">
+              <p className="text-gray-600">Select a category for a random interview question.</p>
+              <p className="mt-4 text-gray-600"> Practice and record your response, then share your videos for rating and comments from fellow users.</p>
+              <p className="mt-4 text-gray-600"> Review other videos. Give constructive feedback and build great community</p>
+
+              <Questions />
+
+              <Slider
+                timer={timer}
+                handleTimer={handleTimer}
+              />
+            </div>
+
           </div>
-          <div className="p-8">
-            <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold"> <Slider
-              timer={timer}
-              handleTimer={handleTimer}
-            /></div>
-            <div className="block mt-1 text-lg leading-tight font-medium text-black">
-              {capturing ? (
+          <div className="md:5/12 lg:w-6/12 rounded-lg">
+            <Webcam audio={false} ref={webcamRef} className="py-4 " />
+            {capturing ? (
               <button
                 className="flex bg-red-700 hover:bg-red-300 text-sm md:text-lg text-white text-center p-2 rounded"
                 onClick={handleStopCaptureClick}
@@ -102,49 +112,41 @@ const Recorder = () => {
                 </svg>
                 Start Recording
               </button>
-            )}</div>
-            <div className="mt-2 text-slate-500">{recordedChunks.length > 0 && (
-              <div className="d-flex">
-                <button
-                  className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded"
-                  onClick={handleDownload}
-                >
-                  <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
-                    <path d="M12 13V22M12 22L15.5 18.5M12 22L8.5 18.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  Download
-                </button>
-                <button className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                  onClick={() => {
-                    console.log("OREVIREW clicked")
-                    setPreview(true)
-                    console.log(preview)}}>
-                  PreView VIDeo HERE
-                </button>
-                {/* <button
-                  className="flex bg-transparent border border-yellow-500 text-sm md:text-lg text-yellow-500 hover:bg-yellow-500 hover:text-white text-center py-2 px-4 rounded"
-                  onClick={() => setPreview(true)}>
-
-                  <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
-                    <path d="M21 7.6V20.4C21 20.7314 20.7314 21 20.4 21H7.6C7.26863 21 7 20.7314 7 20.4V7.6C7 7.26863 7.26863 7 7.6 7H20.4C20.7314 7 21 7.26863 21 7.6Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M18 4H4.6C4.26863 4 4 4.26863 4 4.6V18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M12.9087 11.5452C12.5088 11.3053 12 11.5933 12 12.0597V15.9403C12 16.4067 12.5088 16.6947 12.9087 16.4548L16.1425 14.5145C16.5309 14.2815 16.5309 13.7185 16.1425 13.4855L12.9087 11.5452Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  Preview
-
-                </button> */}
-              </div>
-            )}</div>
+            )}
+          </div>
+          <div className="mt-2 text-slate-500">{recordedChunks.length > 0 && (
+            <div className="d-flex">
+              <button
+                className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded"
+                onClick={handleDownload}
+              >
+                <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
+                  <path d="M12 13V22M12 22L15.5 18.5M12 22L8.5 18.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Download
+              </button>
+              <button className="flex bg-transparent border border-yellow-500 text-sm md:text-lg text-yellow-500 hover:bg-yellow-500 hover:text-white text-center p-2 my-4 rounded"
+                onClick={() => { setPreview(true) }}>
+                <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
+                  <path d="M2 16V8C2 4.68629 4.68629 2 8 2H16C19.3137 2 22 4.68629 22 8V16C22 19.3137 19.3137 22 16 22H8C4.68629 22 2 19.3137 2 16Z" stroke="currentColor" />
+                  <path d="M6 13V11C6 9.89543 6.89543 9 8 9H11C12.1046 9 13 9.89543 13 11V13C13 14.1046 12.1046 15 11 15H8C6.89543 15 6 14.1046 6 13Z" stroke="currentColor" />
+                  <path d="M17.0399 9.22L13.9733 11.52C13.6533 11.76 13.6533 12.24 13.9733 12.48L17.0399 14.78C17.4355 15.0767 17.9999 14.7944 17.9999 14.3V9.7C17.9999 9.20557 17.4355 8.92334 17.0399 9.22Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                See it first
+              </button>
+            </div>
+          )}
           </div>
         </div>
       </div>
-      {/* ⬇ Toggle modal to preview recording */}
-      {preview &&
-        (<div className="modal fade fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto">
+
+      {
+        preview &&
+        (<div className="modal fade fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto z-60">
           <div className="modal-dialog modal-fullscreen relative w-auto pointer-events-none mx-2">
             <div
-              className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current py-14">
+              className="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current py-8">
               <div
                 className="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
                 <h5 className="text-xl font-medium leading-normal text-yellow-500 mx-auto" id="videoModalFullscreenLabel">
@@ -163,7 +165,7 @@ const Recorder = () => {
               </div>
               <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
                 <button className="flex bg-transparent border border-red-400 text-sm md:text-lg text-red-400 hover:bg-red-400 hover:text-white text-center p-2 my-4 rounded-lg mr-4" onClick={() => setPreview(false)}>
-                  X Close
+                  X Close Preview
                 </button>
                 <button
                   className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded-lg"
@@ -178,7 +180,8 @@ const Recorder = () => {
               </div>
             </div>
           </div>
-        </div>)}
+        </div>)
+      }
     </div>
   );
 };

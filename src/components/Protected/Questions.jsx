@@ -44,12 +44,12 @@ const Questions = () => {
           <option value={category} key={category}>{category}</option>
         ))}
       </select>
-      <button class="block w-full mt-6 mb-16 py-3 px-6 text-center rounded-xl transition bg-blue-200 hover:bg-blue-100 active:bg-blue-300 focus:bg-blue-100 sm:w-max" onClick={handleChangeQues}>       
-          Generate random question 
+      <button className="block w-full mt-6 mb-16 py-3 px-6 text-center rounded-xl transition bg-blue-200 hover:bg-blue-100 active:bg-blue-300 focus:bg-blue-100 sm:w-max" onClick={handleChangeQues}>
+        Generate random question
       </button>
-    
+
       <blockquote className="mx-auto text-gray-500 text-shadow-lg text-base">
-        "{question}"
+        {question}
       </blockquote>
     </div>
   )
