@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
-// import api from '../appwrite/appwrite'
 import { useDispatch, useSelector } from "react-redux";
 import Header from './Header';
 import { login } from "../actions/userActions";
@@ -25,21 +24,12 @@ function SignIn() {
     dispatch(login(email, password));
   };
 
-  // const logInGH = () => {
-  //   console.log("github login fired")
-  //   dispatch(loginGithub());
-  // };
 
   return (
     <div className="flex flex-col min-h-screen ">
-      {/*  Site header */}
-      <Header />
-      {/*  Page content */}
       <section className="relative py-16 before:absolute before:inset-0 before:w-full before:h-[50%] before:bg-gray-200">
         <div className="relative container m-auto px-6 text-gray-500 md:px-12 xl:px-40">
-
           <div className="m-auto space-y-8 md:w-8/12 lg:w-full">
-
             <img src={Logo} loading="lazy" className="w-48 ml-4" alt="inselfView logo" />
             <div className="rounded-xl border bg-opacity-50 backdrop-blur-2xl bg-white shadow-xl">
               <div className="lg:grid lg:grid-cols-2">
@@ -47,7 +37,6 @@ function SignIn() {
                   <img src={SIImg} className="rounded-l-xl object-cover" loading="lazy" height="" width="" alt="Key board" />
                 </div>
                 <div className="p-6 sm:p-16">
-
                   <h2 className="flex mb-8 text-2xl text-cyan-900 font-bold">Sign in to your account</h2>
                   {message && <AlertWarning message={message} />}
                   {error && <AlertError message={error} />}

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Header from './Header'
 import { useTypingText } from './TypingTexts/useTypingTexts'
 import BG from '../images/BG.jpg'
 import Logo from '../images/Logo'
@@ -7,15 +6,12 @@ import Logo from '../images/Logo'
 
 const Home = () => {
 
-  const { word, stop, start } = useTypingText(
-    ["jobseekers", "talent-hunters", "recruiters"],
-    130,
-    20
+  const { word } = useTypingText(
+    ["jobseekers", "talent-hunters", "recruiters"],130, 20
   );
 
   return (
     <div>
-      <Header />
       <section className="relative bg-white">
         <img
           className="absolute inset-0 object-[75%] sm:object-[25%] object-cover w-full h-full opacity-25 sm:opacity-100"

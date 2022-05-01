@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import api from '../appwrite/appwrite'
 import { useDispatch, useSelector } from "react-redux";
-import Header from './Header';
 import { register } from "../actions/userActions";
 import { AlertWarning, AlertError } from './Alerts';
 import Loader from './Loader';
@@ -11,7 +8,6 @@ import Logo from '../images/Logo.jpg'
 
 
 const SignUp = () => {
-  // const SignUp = ({ location, history }) => {
 
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -50,9 +46,6 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col min-h-screen ">
-      {/*  Site header */}
-      <Header />
-      {/*  Page content */}
       <section className="relative py-16 before:absolute before:inset-0 before:w-full before:h-[50%] before:bg-gray-200">
         <div className="relative container m-auto px-6 text-gray-500 md:px-12 xl:px-40">
 
