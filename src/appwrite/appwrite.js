@@ -53,8 +53,10 @@ let api = {
     return api.provider().database.deleteDocument(collectionId, documentId);
   },
 
-  createFile: (file) => {    
-    return api.provider().storage.createFile("626f430157c288bb80eb", "unique()", file);    
+  createFile: async(file) => {    
+    const uplResult = await api.provider().storage.createFile("626f430157c288bb80eb", "unique()", file); 
+    console.log("&&return from appwrite%%%%",uplResult.$id);
+    return uplResult
   },
 
   getFileView: (id) => {

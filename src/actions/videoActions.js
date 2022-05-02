@@ -6,29 +6,26 @@ import {
   VIDEO_CREATE_RESET
 } from '../constants/reduxConstants'; 
 
-export const createVideo = (file) => async (dispatch, getState) => {
+export const createVideo =  (file) => async (dispatch, getState) => {
   try {
     dispatch({
       type: VIDEO_CREATE_REQUEST,
     });
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+    // const {
+    //   userLogin: { userInfo },
+    // } = getState();
 
-    // const config = {
-    //   headers: {
-    //     Authorization: `Bearer ${userInfo.token}`,
-    //   },
-    // };
-
-    const { data } = await api.createFile(file);
-    console.log("HERE is frm videoAction****",data)
+    // const { data } = await api.createFile(file);
+    const  data = await api.createFile(file);
+    // resolve(data);
 
     dispatch({
       type: VIDEO_CREATE_SUCCESS,
       payload: data,
     });
+
+    console.log("payload when dispatch video_create_success***",data)
   } catch (error) {
     const message =
       error.response && error.response.data.message
