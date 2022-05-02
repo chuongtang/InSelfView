@@ -1,14 +1,51 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from "react-redux";
+import { AlertWarning, AlertError } from '../Alerts';
 
 const Uploader = () => {
 
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const [message, setMessage] = useState(null);
   const [showUpload, setShowUpload] = useState(false);
   const [detail, setDetail] = useState("");
   const onSubmit = (e) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     console.log("Uplaoder clicked")
-  }
+    let formData = new FormData();
 
+    let submitFile = document.querySelector("#customFile");
+
+    if (typeof submitFile.files[0] === 'undefined'|| detail=="") { 
+      setMessage("All fields required");
+      return  setTimeout(() => {
+        setMessage("");
+      }, 3000); 
+    }
+
+    console.log("submit file :", submitFile.files[0]);
+
+    formData.append("file", submitFile.files[0]);
+    const fileSize = submitFile.files[0].size;
+    console.log("file size for uploading ", fileSize);
+
+    if (fileSize > 50000000) {
+      setMessage("File exceeded size limit of 50MB");
+      return setTimeout(() => {
+        setMessage("");
+      }, 4000);
+    } else {
+      formData.append("name", submitFile.files[0].name);
+      formData.append("detail", detail);
+      formData.append("userID", userInfo.$id);
+
+      console.log("formData userID:", userInfo.$id);
+      // console.log("formData Skill", submitFile.files.length);
+    }
+  }
   return (
     <div>
       <div className="flex items-center my-6">
@@ -38,6 +75,7 @@ const Uploader = () => {
       {showUpload &&
         (<div className="modal fade fixed top-0 left-0 w-full h-full outline-none  overflow-y-auto bg-gray-500 bg-opacity-40 z-60 ">
           <div className="mx-auto mt-18 border-none shadow-lg relative flex flex-col w-3/5 pointer-events-auto bg-gradient-to-t from-gray-300 to-gray-100 rounded-2xl outline-none text-current py-8">
+            {message && <AlertWarning message={message} />}
             <form onSubmit={onSubmit}>
               <div className="modal-body relative p-2">
                 <div className="space-y-2 ">
@@ -48,8 +86,6 @@ const Uploader = () => {
                     required={true}
                     onChange={(e) => setDetail(e.target.value)} />
                 </div>
-
-
                 <div className="flex flex-col">
                   <label htmlFor="file" className="text-sm text-white border border-green-500 rounded-lg font-semibold bg-gradient-to-r from-gray-400 to-gray-100 cursor-pointer p-3 mt-8 hover:bg-rose-500">
                     <input type="file" name="file"
