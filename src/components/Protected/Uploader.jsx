@@ -32,8 +32,8 @@ const Uploader = () => {
     const fileSize = submitFile.files[0].size;
     console.log("file size for uploading ", fileSize);
 
-    if (fileSize > 50000000) {
-      setMessage("File exceeded size limit of 50MB");
+    if (fileSize > 30000000) {
+      setMessage("File exceeded size limit of 30MB");
       return setTimeout(() => {
         setMessage("");
       }, 4000);
@@ -44,6 +44,11 @@ const Uploader = () => {
 
       console.log("formData userID:", userInfo.$id);
       // console.log("formData Skill", submitFile.files.length);
+    }
+    try {
+      
+    } catch (error) {
+      setMessage(error.message);
     }
   }
   return (
@@ -87,7 +92,7 @@ const Uploader = () => {
                     onChange={(e) => setDetail(e.target.value)} />
                 </div>
                 <div className="flex flex-col">
-                  <label htmlFor="file" className="text-sm text-white border border-green-500 rounded-lg font-semibold bg-gradient-to-r from-gray-400 to-gray-100 cursor-pointer p-3 mt-8 hover:bg-rose-500">
+                  <label htmlFor="file" className="text-sm text-white truncate border border-green-500 rounded-lg font-semibold bg-gradient-to-r from-gray-400 to-gray-100 cursor-pointer p-3 mt-8 hover:bg-rose-500">
                     <input type="file" name="file"
                       id="customFile"
                       required={true}
