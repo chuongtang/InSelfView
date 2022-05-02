@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import questionsList from "./questionBank.json";
-// import { Button, Container, Form } from "react-bootstrap";
 
 const Questions = () => {
   const [category, setCategory] = useState("");

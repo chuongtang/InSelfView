@@ -14,7 +14,6 @@ const MainScreen = () => {
       <Recorder />
       <Uploader />
       <VideosGrid />
-      {/* </div> */}
     </div>
   )
 }

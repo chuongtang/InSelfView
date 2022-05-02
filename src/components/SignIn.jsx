@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header from './Header';
 import { login } from "../actions/userActions";
 import { AlertWarning, AlertError } from './Alerts';
 import Loader from './Loader';

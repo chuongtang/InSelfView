@@ -20,6 +20,7 @@ export const login = (email, password) => async (dispatch) => {
     await api.createSession(email, password);
     const data = await api.getAccount();
     console.log("Data from login", data)
+    window.location.href="/"
 
     dispatch({
       type: USER_LOGIN_SUCCESS,
@@ -27,15 +28,11 @@ export const login = (email, password) => async (dispatch) => {
     })
 
     localStorage.setItem('userInfo', JSON.stringify(data))
+
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
       payload: error.response.message
-      // payload: error.response && error.response.data.message
-      // // payload: error
-      //     ? error.response.data
-      //     // ? error
-      //     : error.message,
     });
     console.log('error is', error.response.message);
   }
@@ -48,7 +45,6 @@ export const register = (username, email, password) => async (dispatch) => {
       type: USER_REGISTER_REQUEST,
     })
 
-    // console.log("log from user actions", api)
     const user = await api.createAccount(email, password, username);
     console.log("user after api", user)
     await api.createSession(email, password);
@@ -64,17 +60,11 @@ export const register = (username, email, password) => async (dispatch) => {
       payload: data,
     })
 
-    // // store successful Token in localStorage
-    // localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     console.log(error.response);
     dispatch({
       type: USER_REGISTER_FAIL,
       payload: error.message
-      // error.response && error.response.data.message
-      //   ? error
-      //   // ? error.response.data.message
-      //   : error.message,
     })
   }
 }
@@ -86,37 +76,5 @@ export const logout = () => (dispatch) => {
   document.location.href = '/'
 }
 
-// export const loginGithub =() => async (dispatch) => {
-//   try {
-//     dispatch({
-//       type: USER_LOGINGH_REQUEST,
-//     })
 
-//     await api.provider().account.createOAuth2Session(
-//       "github",
-//       "http://localhost:3000",
-//       "http://localhost:3000/signin"
-//     );
-//     const data = await api.getSession();
-//     console.log("Data from loginGITHUB", data)
-
-//     dispatch({
-//       type: USER_LOGINGH_SUCCESS,
-//       payload: data,
-//     })
-
-//     localStorage.setItem('userInfo', JSON.stringify(data))
-//   } catch (error) {
-//     dispatch({
-//       type: USER_LOGINGH_FAIL,
-//       payload: error.response.message
-//       // payload: error.response && error.response.data.message
-//       // // payload: error
-//       //     ? error.response.data
-//       //     // ? error
-//       //     : error.message,
-//     });
-//     console.log('error is==>', error.response);
-//   }
-// }
 
