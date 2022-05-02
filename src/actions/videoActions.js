@@ -6,7 +6,7 @@ import {
   VIDEO_CREATE_RESET
 } from '../constants/reduxConstants'; 
 
-export const createVideo = () => async (dispatch, getState) => {
+export const createVideo = (file) => async (dispatch, getState) => {
   try {
     dispatch({
       type: VIDEO_CREATE_REQUEST,

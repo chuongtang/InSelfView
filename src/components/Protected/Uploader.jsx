@@ -84,6 +84,7 @@ const Uploader = () => {
           <div className="mx-auto mt-18 border-none shadow-lg relative flex flex-col w-3/5 pointer-events-auto bg-gradient-to-t from-gray-300 to-gray-100 rounded-2xl outline-none text-current py-8">
             {message && <AlertWarning message={message} />}
             <form onSubmit={onSubmit}>
+            {/* <form onSubmit={onSubmit}> */}
               <div className="modal-body relative p-2">
                 <div className="space-y-2 ">
                   <label htmlFor="title" className="text-green-500 font-bold p-2">Title or question related to this Video</label>
@@ -115,7 +116,7 @@ const Uploader = () => {
                 <button
                   className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded-lg"
                   type="submit"
-                  onClick={() => onSubmit()}
+                  // onClick={() => onSubmit()}
                 >
                   <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
                     <path d="M12 22V13M12 13L15.5 16.5M12 13L8.5 16.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />

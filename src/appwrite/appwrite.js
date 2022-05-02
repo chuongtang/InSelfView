@@ -53,12 +53,8 @@ let api = {
     return api.provider().database.deleteDocument(collectionId, documentId);
   },
 
-  createFile: async (file) => {
-    // return api.provider().storage.createFile('[626f430157c288bb80eb]', 'unique()', file, ["*"], ["*"]);
-    const resultUpl = await api.provider().storage.createFile(file, ["*"], ["*"]);
-    console.log(resultUpl)
-    return resultUpl
-    // return api.provider().storage.createFile(file, ["*"], ["*"]);
+  createFile: (file) => {    
+    return api.provider().storage.createFile("626f430157c288bb80eb", "unique()", file);    
   },
 
   getFileView: (id) => {
