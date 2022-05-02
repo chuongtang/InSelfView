@@ -129,7 +129,8 @@ const InfoPage = () => {
                 </div>
               </div>
             </div>
-            <button className="flex mx-auto mt-16 border border-indigo-500 text-indigo-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-indigo-600 focus:outline-none focus:shadow-outline">Get Started</button>
+            <a href="/signin">
+            <button className="flex mx-auto mt-16 border border-indigo-500 text-indigo-500 rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:text-white hover:bg-indigo-600 focus:outline-none focus:shadow-outline" >Get Started</button></a>
           </div>
         </section>
         <footer className="w-full py-4 bg-gray-100">
