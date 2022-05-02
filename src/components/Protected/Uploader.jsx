@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { AlertWarning, AlertError } from '../Alerts';
+import {createVideo} from '../../actions/videoActions'
 
 const Uploader = () => {
 
@@ -25,8 +26,8 @@ const Uploader = () => {
         setMessage("");
       }, 3000); 
     }
-
-    console.log("submit file :", submitFile.files[0]);
+    const fileToUpl = submitFile.files[0]
+    // console.log("submit file :", fileToUpl);
 
     formData.append("file", submitFile.files[0]);
     const fileSize = submitFile.files[0].size;
@@ -42,11 +43,12 @@ const Uploader = () => {
       formData.append("detail", detail);
       formData.append("userID", userInfo.$id);
 
-      console.log("formData userID:", userInfo.$id);
-      // console.log("formData Skill", submitFile.files.length);
+      // console.log("formData userID:", userInfo.$id);
+      // console.log("formData ", submitFile.files.length);
     }
     try {
-      
+      dispatch(createVideo(fileToUpl));
+      console.log("createdVideo dispatched")
     } catch (error) {
       setMessage(error.message);
     }
