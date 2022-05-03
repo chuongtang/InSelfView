@@ -95,7 +95,7 @@ const Uploader = () => {
           <div className="mx-auto mt-18 border-none shadow-lg relative flex flex-col w-3/5 pointer-events-auto bg-gradient-to-t from-gray-300 to-gray-100 rounded-2xl outline-none text-current py-8">
             {message && <AlertWarning message={message} />}
             {error && <AlertError message={error} />}
-            {loading && <Loader className="float-end h-1/2 z-2"/>}
+
             <form onSubmit={onSubmit}>
             {/* <form onSubmit={onSubmit}> */}
               <div className="modal-body relative p-2">
@@ -117,6 +117,7 @@ const Uploader = () => {
                   </label>
                 </div>
               </div>
+              {!loading ?
               <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
                 <button className="flex bg-transparent border border-red-400 text-sm md:text-lg text-red-400 hover:bg-red-400 hover:text-white text-center p-2 my-4 rounded-lg mr-4" onClick={() => setShowUpload(false)}>
                   <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
@@ -136,7 +137,7 @@ const Uploader = () => {
                   </svg>
                   Upload
                 </button>
-              </div>
+              </div> : <Loader/>}
             </form>
           </div>
         </div>)

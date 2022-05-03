@@ -1,4 +1,5 @@
 import React from 'react'
+import Placeholder from '../../images/vdPlaceHolder.svg'
 
 const VideosGrid = () => {
   return (
@@ -8,13 +9,13 @@ const VideosGrid = () => {
           <span className="absolute inset-x-0 h-px -translate-y-1/2 bg-black/10 top-1/2"></span>
 
           <h2 className="relative inline-block px-4 text-2xl font-bold text-center bg-white">
-            Recently Viewed
+            View other's recording
           </h2>
         </div>
 
         <div className="grid grid-cols-2 mt-8 lg:grid-cols-4 gap-x-4 gap-y-8">
           <a
-            href="/product/build-your-own-drone"
+            href="/videoId"
             className="relative block border border-gray-100"
           >
             <button
@@ -31,16 +32,16 @@ const VideosGrid = () => {
               loading="lazy"
               alt="Build Your Own Drone"
               className="object-contain w-full h-56"
-              src="https://www.hyperui.dev/photos/toy-1.jpeg"
+              src={Placeholder}
             />
 
             <div className="p-6">
               <p className="text-sm font-medium text-gray-600">
-                $14.99
+                Video onwer name
               </p>
 
               <h5 className="mt-1 text-lg font-bold">
-                Build Your Own Drone
+               Titile of this recording
               </h5>
 
               <button
@@ -49,7 +50,7 @@ const VideosGrid = () => {
                 className="flex items-center justify-center w-full px-8 py-4 mt-4 bg-yellow-500 rounded-sm"
               >
                 <span className="text-sm font-medium">
-                  Add to Cart
+                  Add comments
                 </span>
 
                 <svg
@@ -80,16 +81,16 @@ const VideosGrid = () => {
               loading="lazy"
               alt="Build Your Own Drone"
               className="object-contain w-full h-56"
-              src="https://www.hyperui.dev/photos/toy-1.jpeg"
+              src={Placeholder}
             />
 
             <div className="p-6">
               <p className="text-sm font-medium text-gray-600">
-                $14.99
+                Video onwer name
               </p>
 
               <h5 className="mt-1 text-lg font-bold">
-                Build Your Own Drone
+               Titile of this recording
               </h5>
 
               <button
@@ -98,7 +99,7 @@ const VideosGrid = () => {
                 className="flex items-center justify-center w-full px-8 py-4 mt-4 bg-yellow-500 rounded-sm"
               >
                 <span className="text-sm font-medium">
-                  Add to Cart
+                  Add comments
                 </span>
 
                 <svg
@@ -129,16 +130,16 @@ const VideosGrid = () => {
               loading="lazy"
               alt="Build Your Own Drone"
               className="object-contain w-full h-56"
-              src="https://www.hyperui.dev/photos/toy-1.jpeg"
+              src={Placeholder}
             />
 
             <div className="p-6">
               <p className="text-sm font-medium text-gray-600">
-                $14.99
+                Video onwer name
               </p>
 
               <h5 className="mt-1 text-lg font-bold">
-                Build Your Own Drone
+               Titile of this recording
               </h5>
 
               <button
@@ -147,7 +148,7 @@ const VideosGrid = () => {
                 className="flex items-center justify-center w-full px-8 py-4 mt-4 bg-yellow-500 rounded-sm"
               >
                 <span className="text-sm font-medium">
-                  Add to Cart
+                  Add comments
                 </span>
 
                 <svg
@@ -178,16 +179,16 @@ const VideosGrid = () => {
               loading="lazy"
               alt="Build Your Own Drone"
               className="object-contain w-full h-56"
-              src="https://www.hyperui.dev/photos/toy-1.jpeg"
+              src={Placeholder}
             />
 
             <div className="p-6">
               <p className="text-sm font-medium text-gray-600">
-                $14.99
+                Video onwer name
               </p>
 
               <h5 className="mt-1 text-lg font-bold">
-                Build Your Own Drone
+               Titile of this recording
               </h5>
 
               <button
@@ -196,7 +197,7 @@ const VideosGrid = () => {
                 className="flex items-center justify-center w-full px-8 py-4 mt-4 bg-yellow-500 rounded-sm"
               >
                 <span className="text-sm font-medium">
-                  Add to Cart
+                  Add comments
                 </span>
 
                 <svg

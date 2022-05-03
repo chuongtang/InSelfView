@@ -12,11 +12,6 @@ export const createVideo =  (file, title) => async (dispatch, getState) => {
       type: VIDEO_CREATE_REQUEST,
     });
 
-    // const {
-    //   userLogin: { userInfo },
-    // } = getState();
-
-    // const { data } = await api.createFile(file);
     const data = await api.createFile(file);
     const dbRecord = await api.createDocument({ "Create_date": data.dateCreated, "Title": title, "VideoName": data.name, "videoID": data.$id }, [`${data.$read[0]}`], [`${data.$write[0]}`]);
     console.log("Return dbRecord fromdatabase******",dbRecord)
