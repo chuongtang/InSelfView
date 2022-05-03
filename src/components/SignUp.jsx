@@ -4,7 +4,7 @@ import { register } from "../actions/userActions";
 import { AlertWarning, AlertError } from './Alerts';
 import Loader from './Loader';
 import SUimg from "../images/SUimg.jpg"
-import Logo from '../images/Logo.jpg'
+import Logo from '../images/LOGO.jpg'
 
 
 const SignUp = () => {
