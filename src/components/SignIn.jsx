@@ -4,7 +4,7 @@ import { login } from "../actions/userActions";
 import { AlertWarning, AlertError } from './Alerts';
 import Loader from './Loader';
 import SIImg from "../images/SIImg.jpg"
-import Logo from '../images/Logo.jpg'
+import Logo from '../images/LOGO.jpg'
 
 
 function SignIn() {
