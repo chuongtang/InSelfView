@@ -95,7 +95,7 @@ const Uploader = () => {
           <div className="mx-auto mt-18 border-none shadow-lg relative flex flex-col w-3/5 pointer-events-auto bg-gradient-to-t from-gray-300 to-gray-100 rounded-2xl outline-none text-current py-8">
             {message && <AlertWarning message={message} />}
             {error && <AlertError message={error} />}
-            {loading && <Loader />}
+            {loading && <Loader className="float-end h-1/2 z-2"/>}
             <form onSubmit={onSubmit}>
             {/* <form onSubmit={onSubmit}> */}
               <div className="modal-body relative p-2">

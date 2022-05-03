@@ -5,7 +5,7 @@ const Loader = (props) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       id="ezCrXJn2kcG1"
-      viewBox="0 0 500 500"
+      viewBox="100 100 500 500"
       shapeRendering="geometricPrecision"
       textRendering="geometricPrecision"
       {...props}
@@ -73,7 +73,7 @@ const Loader = (props) => {
           <g id="ezCrXJn2kcG5" transform="translate(-250.9 -253.659)">
             <g id="ezCrXJn2kcG6" mask="url(#ezCrXJn2kcG8)">
               <path
-                d="M-176.502 0c0-97.48 79.023-176.502 176.502-176.502C97.48-176.502 176.502-97.48 176.502 0S97.48 176.502 0 176.502-176.502 97.48-176.502 0z"
+                d="M-176.502 0c0-97.48 79.023-176.502 176.502-176.502C97.48-176.502 176.502-97.48 176.502 0S97.48 176.502 0 176.502-176.502 97.48-176.502 0Z"
                 transform="rotate(14.745 -854.62 1097.702) scale(.5931)"
                 fill="none"
                 stroke="#40A2F5"
@@ -88,7 +88,7 @@ const Loader = (props) => {
               <mask id="ezCrXJn2kcG8" mask-type="luminance">
                 <path
                   id="ezCrXJn2kcG9"
-                  d="m131.08 246.526 42.09 2.004 176.376-84.847q43.426 42.09 42.758 92.864c-.669 50.775-52.78 138.295-152.325 129.61-99.546-8.685-128.942-94.2-108.9-139.631z"
+                  d="m131.08 246.526 42.09 2.004 176.376-84.847q43.426 42.09 42.758 92.864c-.669 50.775-52.78 138.295-152.325 129.61-99.546-8.685-128.942-94.2-108.9-139.631Z"
                   fill="url(#ezCrXJn2kcG9-fill)"
                   stroke="none"
                   strokeWidth={1}
@@ -98,12 +98,12 @@ const Loader = (props) => {
             <g
               id="ezCrXJn2kcG10"
               transform="rotate(16.827 -324.368 480.386) scale(.99606)"
-              stroke="none"
-              strokeWidth={1}
             >
               <path
                 id="ezCrXJn2kcG11"
                 fill="url(#ezCrXJn2kcG11-fill)"
+                stroke="none"
+                strokeWidth={1}
                 d="m111 115-41.087-6.198L59 104l-10.98 4.868L8 115 59 5l52 110z"
               />
               <path
@@ -113,6 +113,8 @@ const Loader = (props) => {
                 }}
                 opacity={0.6}
                 fill="#000"
+                stroke="none"
+                strokeWidth={1}
                 d="M59 104V5L47.988 108.802 59 104z"
               />
               <path
@@ -122,6 +124,8 @@ const Loader = (props) => {
                 }}
                 opacity={0.6}
                 fill="#DEEDFF"
+                stroke="none"
+                strokeWidth={1}
                 d="M59 104V5l10.946 103.802L59 104z"
               />
             </g>
