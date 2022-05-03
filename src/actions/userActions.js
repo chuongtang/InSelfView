@@ -49,12 +49,13 @@ export const register = (username, email, password) => async (dispatch) => {
     console.log("user after api", user)
     await api.createSession(email, password);
     const data = await api.getAccount();
-
+    localStorage.setItem('userInfo', JSON.stringify(user))
+    window.location.href="/"
     dispatch({
       type: USER_REGISTER_SUCCESS,
       payload: user,
     })
-
+    
     dispatch({
       type: USER_LOGIN_SUCCESS,
       payload: data,
