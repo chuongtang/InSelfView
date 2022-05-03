@@ -10,7 +10,7 @@ const Uploader = () => {
   const { userInfo } = userLogin;
   const [message, setMessage] = useState(null);
   const [showUpload, setShowUpload] = useState(false);
-  const [detail, setDetail] = useState("");
+  const [title, setTitle] = useState("");
   const onSubmit = (e) => {
     if (e) {
       e.preventDefault();
@@ -20,7 +20,7 @@ const Uploader = () => {
 
     let submitFile = document.querySelector("#customFile");
 
-    if (typeof submitFile.files[0] === 'undefined'|| detail=="") { 
+    if (typeof submitFile.files[0] === 'undefined'|| title=="") { 
       setMessage("All fields required");
       return  setTimeout(() => {
         setMessage("");
@@ -40,14 +40,14 @@ const Uploader = () => {
       }, 4000);
     } else {
       formData.append("name", submitFile.files[0].name);
-      formData.append("detail", detail);
+      formData.append("title", title);
       formData.append("userID", userInfo.$id);
 
       // console.log("formData userID:", userInfo.$id);
       // console.log("formData ", submitFile.files.length);
     }
     try {
-      dispatch(createVideo(fileToUpl));
+      dispatch(createVideo(fileToUpl, title));
       console.log("createdVideo dispatched")
     } catch (error) {
       setMessage(error.message);
@@ -90,9 +90,9 @@ const Uploader = () => {
                   <label htmlFor="title" className="text-green-500 font-bold p-2">Title or question related to this Video</label>
                   <input type="text" name="title" id="title"
                     className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-sky-300 focus:outline-none"
-                    value={detail}
+                    value={title}
                     required={true}
-                    onChange={(e) => setDetail(e.target.value)} />
+                    onChange={(e) => setTitle(e.target.value)} />
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="file" className="text-sm text-white truncate border border-green-500 rounded-lg font-semibold bg-gradient-to-r from-gray-400 to-gray-100 cursor-pointer p-3 mt-8 hover:bg-rose-500">
