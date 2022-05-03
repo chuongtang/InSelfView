@@ -39,11 +39,12 @@ let api = {
     return api
       .provider()
       .database.createDocument(Server.collectionID,"unique()", data, read, write);
+      // .database.createDocument(Server.collectionID,"unique()", data, read, write);
   },
 
   listDocuments: async () => {
     console.log("Listing documents FIRED")
-    const returnList = await api.provider().database.listDocuments('6270a48cb1af03a8be86');
+    const returnList = await api.provider().database.listDocuments(Server.collectionID);
     console.log("Listing documents", returnList)
     return returnList
   },
@@ -61,7 +62,6 @@ let api = {
   // Storage APIs 📀
   createFile: async(file) => {    
     const uplResult = await api.provider().storage.createFile(Server.bucketID, "unique()", file); 
-    // const uplResult = await api.provider().storage.createFile("626f430157c288bb80eb", "unique()", file); 
     console.log("&&return from appwrite%%%%",uplResult.$id);
     return uplResult
   },
