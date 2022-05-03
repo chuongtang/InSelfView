@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { AlertWarning, AlertError } from '../Alerts';
 import {createVideo} from '../../actions/videoActions'
+import Loader from '../Loader'
 
 const Uploader = () => {
 
@@ -11,6 +12,16 @@ const Uploader = () => {
   const [message, setMessage] = useState(null);
   const [showUpload, setShowUpload] = useState(false);
   const [title, setTitle] = useState("");
+  
+  const videoCreate = useSelector((state) => state.videoCreate)
+  const { loading, video, success, error } = videoCreate
+
+  useEffect(() => {
+    if (success) {
+      console.log("=>Successfully uploaded video and recorded in DB")
+    }
+  }, [success]);
+
   const onSubmit = (e) => {
     if (e) {
       e.preventDefault();
@@ -83,6 +94,8 @@ const Uploader = () => {
         (<div className="modal fade fixed top-0 left-0 w-full h-full outline-none  overflow-y-auto bg-gray-500 bg-opacity-40 z-60 ">
           <div className="mx-auto mt-18 border-none shadow-lg relative flex flex-col w-3/5 pointer-events-auto bg-gradient-to-t from-gray-300 to-gray-100 rounded-2xl outline-none text-current py-8">
             {message && <AlertWarning message={message} />}
+            {error && <AlertError message={error} />}
+            {loading && <Loader />}
             <form onSubmit={onSubmit}>
             {/* <form onSubmit={onSubmit}> */}
               <div className="modal-body relative p-2">
