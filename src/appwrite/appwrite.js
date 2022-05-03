@@ -10,10 +10,12 @@ let api = {
     }
     let appwrite = new Appwrite();
     appwrite.setEndpoint(Server.endpoint).setProject(Server.project);
+    // appwrite.setKey(Server.apiKEY);
     api.sdk = appwrite;
     return appwrite;
   },
 
+  // User APIs 👨🏿‍🤝‍👨🏿
   createAccount: (email, password, name) => {
     return api.provider().account.create("unique()",email, password, name);
   },
@@ -32,15 +34,18 @@ let api = {
   deleteCurrentSession: () => {
     return api.provider().account.deleteSession('current');
   },
-
+  // Database APIs 🔔
   createDocument: (data, read, write) => {
     return api
       .provider()
       .database.createDocument(Server.collectionID,"unique()", data, read, write);
   },
 
-  listDocuments: (collectionId) => {
-    return api.provider().database.listDocuments(collectionId);
+  listDocuments: async () => {
+    console.log("Listing documents FIRED")
+    const returnList = await api.provider().database.listDocuments('6270a48cb1af03a8be86');
+    console.log("Listing documents", returnList)
+    return returnList
   },
 
   updateDocument: (collectionId, documentId, data, read, write) => {
@@ -53,11 +58,19 @@ let api = {
     return api.provider().database.deleteDocument(collectionId, documentId);
   },
 
+  // Storage APIs 📀
   createFile: async(file) => {    
     const uplResult = await api.provider().storage.createFile(Server.bucketID, "unique()", file); 
     // const uplResult = await api.provider().storage.createFile("626f430157c288bb80eb", "unique()", file); 
     console.log("&&return from appwrite%%%%",uplResult.$id);
     return uplResult
+  },
+
+  getVideosList: async () =>{
+    console.log("appwrite getVideoList fired")
+    const videosList = await api.provider().storage.listFiles(Server.bucketID);
+    console.log("Return from appwrite videos list",videosList)
+    return videosList
   },
 
   getFileView: (id) => {

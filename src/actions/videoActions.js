@@ -3,7 +3,11 @@ import {
   VIDEO_CREATE_REQUEST,
   VIDEO_CREATE_SUCCESS,
   VIDEO_CREATE_FAIL,
-  VIDEO_CREATE_RESET
+  VIDEO_CREATE_RESET,
+  VIDEO_LIST_REQUEST,
+  VIDEO_LIST_SUCCESS,
+  VIDEO_LIST_FAIL,
+  
 } from '../constants/reduxConstants'; 
 
 export const createVideo =  (file, title) => async (dispatch, getState) => {
@@ -32,6 +36,32 @@ export const createVideo =  (file, title) => async (dispatch, getState) => {
     }
     dispatch({
       type: VIDEO_CREATE_FAIL,
+      payload: message,
+    });
+  }
+}
+export const listVideos = () => async (
+  dispatch) => {
+  try {
+    dispatch({ type: VIDEO_LIST_REQUEST });
+
+    const data = await api.listDocuments();
+    console.log("Return videoList fromdatabase******",data)
+
+    dispatch({
+      type: VIDEO_LIST_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: VIDEO_LIST_FAIL,
       payload: message,
     });
   }
