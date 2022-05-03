@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { AlertWarning, AlertError } from '../Alerts';
 import {createVideo} from '../../actions/videoActions'
+import Loader from '../Loader'
 
 const Uploader = () => {
 
@@ -10,7 +11,17 @@ const Uploader = () => {
   const { userInfo } = userLogin;
   const [message, setMessage] = useState(null);
   const [showUpload, setShowUpload] = useState(false);
-  const [detail, setDetail] = useState("");
+  const [title, setTitle] = useState("");
+  
+  const videoCreate = useSelector((state) => state.videoCreate)
+  const { loading, video, success, error } = videoCreate
+
+  useEffect(() => {
+    if (success) {
+      console.log("=>Successfully uploaded video and recorded in DB")
+    }
+  }, [success]);
+
   const onSubmit = (e) => {
     if (e) {
       e.preventDefault();
@@ -20,7 +31,7 @@ const Uploader = () => {
 
     let submitFile = document.querySelector("#customFile");
 
-    if (typeof submitFile.files[0] === 'undefined'|| detail=="") { 
+    if (typeof submitFile.files[0] === 'undefined'|| title=="") { 
       setMessage("All fields required");
       return  setTimeout(() => {
         setMessage("");
@@ -40,14 +51,14 @@ const Uploader = () => {
       }, 4000);
     } else {
       formData.append("name", submitFile.files[0].name);
-      formData.append("detail", detail);
+      formData.append("title", title);
       formData.append("userID", userInfo.$id);
 
       // console.log("formData userID:", userInfo.$id);
       // console.log("formData ", submitFile.files.length);
     }
     try {
-      dispatch(createVideo(fileToUpl));
+      dispatch(createVideo(fileToUpl, title));
       console.log("createdVideo dispatched")
     } catch (error) {
       setMessage(error.message);
@@ -83,6 +94,8 @@ const Uploader = () => {
         (<div className="modal fade fixed top-0 left-0 w-full h-full outline-none  overflow-y-auto bg-gray-500 bg-opacity-40 z-60 ">
           <div className="mx-auto mt-18 border-none shadow-lg relative flex flex-col w-3/5 pointer-events-auto bg-gradient-to-t from-gray-300 to-gray-100 rounded-2xl outline-none text-current py-8">
             {message && <AlertWarning message={message} />}
+            {error && <AlertError message={error} />}
+            {loading && <Loader />}
             <form onSubmit={onSubmit}>
             {/* <form onSubmit={onSubmit}> */}
               <div className="modal-body relative p-2">
@@ -90,9 +103,9 @@ const Uploader = () => {
                   <label htmlFor="title" className="text-green-500 font-bold p-2">Title or question related to this Video</label>
                   <input type="text" name="title" id="title"
                     className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300 focus:ring-2 focus:ring-sky-300 focus:outline-none"
-                    value={detail}
+                    value={title}
                     required={true}
-                    onChange={(e) => setDetail(e.target.value)} />
+                    onChange={(e) => setTitle(e.target.value)} />
                 </div>
                 <div className="flex flex-col">
                   <label htmlFor="file" className="text-sm text-white truncate border border-green-500 rounded-lg font-semibold bg-gradient-to-r from-gray-400 to-gray-100 cursor-pointer p-3 mt-8 hover:bg-rose-500">

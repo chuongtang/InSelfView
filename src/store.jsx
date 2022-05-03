@@ -2,15 +2,16 @@ import { legacy_createStore as createStore, combineReducers, applyMiddleware } f
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import {
-  userLoginReducer,
-  userRegisterReducer,
-} from './reducers/userReducers'
+import { userLoginReducer, userRegisterReducer} from './reducers/userReducers'
+import {videoCreateReducer, myVideosListReducer, videoDetailsReducer} from './reducers/videoReducers'
 
 const reducer = combineReducers({
   
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  videoCreate: videoCreateReducer,
+  videosList: myVideosListReducer,
+  videoDetails: videoDetailsReducer
 
 });
 

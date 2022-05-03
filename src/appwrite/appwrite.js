@@ -33,10 +33,10 @@ let api = {
     return api.provider().account.deleteSession('current');
   },
 
-  createDocument: (collectionId, data, read, write) => {
+  createDocument: (data, read, write) => {
     return api
       .provider()
-      .database.createDocument(collectionId, data, read, write);
+      .database.createDocument(Server.collectionID,"unique()", data, read, write);
   },
 
   listDocuments: (collectionId) => {
@@ -54,7 +54,8 @@ let api = {
   },
 
   createFile: async(file) => {    
-    const uplResult = await api.provider().storage.createFile("626f430157c288bb80eb", "unique()", file); 
+    const uplResult = await api.provider().storage.createFile(Server.bucketID, "unique()", file); 
+    // const uplResult = await api.provider().storage.createFile("626f430157c288bb80eb", "unique()", file); 
     console.log("&&return from appwrite%%%%",uplResult.$id);
     return uplResult
   },
