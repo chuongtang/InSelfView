@@ -46,11 +46,11 @@ export const listVideos = () => async (
     dispatch({ type: VIDEO_LIST_REQUEST });
 
     const data = await api.listDocuments();
-    console.log("Return videoList fromdatabase******",data)
+    console.log("Return videoList fromdatabase******",data.documents)
 
     dispatch({
       type: VIDEO_LIST_SUCCESS,
-      payload: data,
+      payload: data.documents,
     });
   } catch (error) {
     const message =
@@ -65,4 +65,9 @@ export const listVideos = () => async (
       payload: message,
     });
   }
+}
+
+export const viewVideo = async(id) =>{
+  return await api.getFileView(id);
+   
 }
