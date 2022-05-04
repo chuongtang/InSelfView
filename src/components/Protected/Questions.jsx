@@ -43,7 +43,7 @@ const Questions = () => {
           <option value={category} key={category}>{category}</option>
         ))}
       </select>
-      <button className="block w-full mt-6 mb-16 py-3 px-6 text-center rounded-xl transition bg-blue-200 hover:bg-blue-100 active:bg-blue-300 focus:bg-blue-100 sm:w-max" onClick={handleChangeQues}>
+      <button className="block w-full mt-6 mb-16 py-3 px-6 text-center rounded-xl transition bg-blue-200 hover:bg-blue-100 active:bg-blue-300 focus:bg-blue-100 sm:w-max shadow-lg" onClick={handleChangeQues}>
         Generate random question
       </button>
 

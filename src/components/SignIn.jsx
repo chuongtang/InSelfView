@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/userActions";
 import { AlertWarning, AlertError } from './Alerts';
 import Loader from './Loader';
-import SIImg from "../images/SIImg.jpg"
+import SIImg from "../images/SIImg.webp"
 import Logo from '../images/LOGO.jpg'
 
 
@@ -20,6 +20,7 @@ function SignIn() {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
+    userInfo && setMessage("Successfully signed in")
   };
 
 

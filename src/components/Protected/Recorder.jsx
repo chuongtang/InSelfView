@@ -70,7 +70,7 @@ const Recorder = () => {
   }, [recordedChunks]);
 
   return (
-    <div className="py-16 bg-gradient-to-br from-blue-50 to-blue-100">
+    <div className="py-16 bg-gradient-to-br from-blue-100 to-gray-300">
       <div className="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
         <div className="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
           <div className="space-y-6 md:7/12 lg:w-6/12">
@@ -93,7 +93,7 @@ const Recorder = () => {
             <Webcam audio={false} ref={webcamRef} className="py-4 " />
             {capturing ? (
               <button
-                className="flex bg-red-700 hover:bg-red-300 text-sm md:text-lg text-white text-center p-2 rounded"
+                className="flex bg-red-700 hover:bg-red-300 text-sm md:text-lg text-white text-center p-2 rounded-lg shadow-lg"
                 onClick={handleStopCaptureClick}
               >
                 <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1">
@@ -104,7 +104,7 @@ const Recorder = () => {
               </button>
             ) : (
               <button
-                className="flex bg-gray-400 hover:bg-gray-900 text-white text-sm md:text-lg text-center py-2 px-2 rounded"
+                className="flex bg-gray-400 hover:bg-gray-900 text-white text-sm md:text-lg text-center py-2 px-2 rounded-lg shadow-lg"
                 onClick={handleStartCaptureClick}
               >
                 <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-1">
@@ -117,7 +117,7 @@ const Recorder = () => {
           <div className="mt-2 text-slate-500">{recordedChunks.length > 0 && (
             <div className="d-flex">
               <button
-                className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded"
+                className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded-lg shadow-lg"
                 onClick={handleDownload}
               >
                 <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
@@ -126,7 +126,7 @@ const Recorder = () => {
                 </svg>
                 Download
               </button>
-              <button className="flex bg-transparent border border-yellow-500 text-sm md:text-lg text-yellow-500 hover:bg-yellow-500 hover:text-white text-center p-2 my-4 rounded"
+              <button className="flex bg-transparent border border-yellow-500 text-sm md:text-lg text-yellow-500 hover:bg-yellow-500 hover:text-white text-center p-2 my-4 rounded-lg shadow-lg"
                 onClick={() => { setPreview(true) }}>
                 <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
                   <path d="M2 16V8C2 4.68629 4.68629 2 8 2H16C19.3137 2 22 4.68629 22 8V16C22 19.3137 19.3137 22 16 22H8C4.68629 22 2 19.3137 2 16Z" stroke="currentColor" />
@@ -164,11 +164,11 @@ const Recorder = () => {
                 </video>
               </div>
               <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
-                <button className="flex bg-transparent border border-red-400 text-sm md:text-lg text-red-400 hover:bg-red-400 hover:text-white text-center p-2 my-4 rounded-lg mr-4" onClick={() => setPreview(false)}>
+                <button className="flex bg-transparent border border-red-400 text-sm md:text-lg text-red-400 hover:bg-red-400 hover:text-white text-center p-2 my-4 rounded-lg shadow-lg mr-4" onClick={() => setPreview(false)}>
                   X Close Preview
                 </button>
                 <button
-                  className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded-lg"
+                  className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded-lg shadow-lg"
                   onClick={handleDownload}
                 >
                   <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../actions/userActions";
 import { AlertWarning, AlertError } from './Alerts';
 import Loader from './Loader';
-import SUimg from "../images/SUimg.jpg"
+import SUimg from "../images/SUimg.webp"
 import Logo from '../images/LOGO.jpg'
 
 
