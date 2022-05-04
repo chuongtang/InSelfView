@@ -47,7 +47,7 @@ const Uploader = () => {
       }, 3000);
     }
     const fileToUpl = submitFile.files[0]
-    // console.log("submit file :", fileToUpl);
+    console.log("submit file :", fileToUpl);
 
     // formData.append("file", submitFile.files[0]);
     const fileSize = submitFile.files[0].size;
@@ -59,10 +59,7 @@ const Uploader = () => {
         setMessage("");
       }, 4000);
     } else {
-      // formData.append("name", submitFile.files[0].name);
-      // formData.append("title", title);
-      // formData.append("userID", userInfo.$id);
-      // console.log("FORMDATA^^^^^",formData);
+
     }
     try {
       dispatch(createVideo(fileToUpl, title, createdBy));

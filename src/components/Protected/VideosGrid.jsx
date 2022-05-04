@@ -21,6 +21,7 @@ const VideosGrid = () => {
 
   useEffect(() => {
     dispatch(listVideos());
+    // dispatch(viewVideo("6271fb3009848c49dac9"))
   }, [success]);
 
   return (
@@ -105,10 +106,6 @@ const VideosGrid = () => {
         {scrolled &&
           <a href="#gridTop">
             <button type="button" className="block fixed right-14 bottom-8 z-99 bg-rose-500 p-2 text-xs text-white rounded-lg shadow-lg font-bold animate-bounce"
-              // onClick={() => {
-              //   document.body.scrollTop = 0;
-              //   document.documentElement.scrollTop = 0;
-              // }}
             >Top ⇑</button></a>}
 
       </div>

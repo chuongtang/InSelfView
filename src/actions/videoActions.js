@@ -68,6 +68,6 @@ export const listVideos = () => async (
 }
 
 export const viewVideo = async(id) =>{
-  return await api.getFileView(id);
+  return await api.getVideoView(id);
    
 }

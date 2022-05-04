@@ -39,7 +39,6 @@ let api = {
     return api
       .provider()
       .database.createDocument(Server.collectionID,"unique()", data, read, write);
-      // .database.createDocument(Server.collectionID,"unique()", data, read, write);
   },
 
   listDocuments: async () => {
@@ -74,8 +73,10 @@ let api = {
     return videosList
   },
 
-  getFileView: (id) => {
-    return api.provider().storage.getFileView(id);
+  getVideoView: async (id) => {
+    const viewLink = await api.provider().storage.getFileView(Server.bucketID, id);
+    console.log("Return from viewLink &&&&&", viewLink)
+    return viewLink
   }
 
 
