@@ -10,14 +10,14 @@ import {
   
 } from '../constants/reduxConstants'; 
 
-export const createVideo =  (file, title) => async (dispatch, getState) => {
+export const createVideo =  (file, title, createdBy) => async (dispatch, getState) => {
   try {
     dispatch({
       type: VIDEO_CREATE_REQUEST,
     });
 
     const data = await api.createFile(file);
-    const dbRecord = await api.createDocument({ "Create_date": data.dateCreated, "Title": title, "VideoName": data.name, "videoID": data.$id }, ['role:all'], [`${data.$write[0]}`]);
+    const dbRecord = await api.createDocument({ "Create_date": data.dateCreated, "Title": title, "VideoName": data.name, "videoID": data.$id, "CreatedBy": createdBy }, ['role:all'], [`${data.$write[0]}`]);
     console.log("Return dbRecord fromdatabase******",dbRecord)
 
     dispatch({
@@ -46,7 +46,7 @@ export const listVideos = () => async (
     dispatch({ type: VIDEO_LIST_REQUEST });
 
     const data = await api.listDocuments();
-    console.log("Return videoList fromdatabase******",data.documents)
+    console.log("Return videoList fromdatabase******",data.documents.reverse())
 
     dispatch({
       type: VIDEO_LIST_SUCCESS,

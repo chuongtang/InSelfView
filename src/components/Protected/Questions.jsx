@@ -47,7 +47,7 @@ const Questions = () => {
         Generate random question
       </button>
 
-      <blockquote className="mx-auto text-gray-500 text-shadow-lg text-base">
+      <blockquote className="mx-auto text-yellow-600 text-shadow-lg text-base">
         {question}
       </blockquote>
   

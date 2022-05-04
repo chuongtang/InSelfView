@@ -12,11 +12,14 @@ const VideosGrid = () => {
 
   const videoList = useSelector((state) => state.videosList);
   const { loading, error, videos } = videoList;
+ 
+  const videoCreate = useSelector((state) => state.videoCreate)
+  const {  success } = videoCreate
 
   useEffect(() => {
 
     dispatch(listVideos());
-  }, []);
+  }, [success]);
 
   console.log("videos from useEffect", videos)
   console.log("loading from useEffect", loading)
@@ -37,7 +40,7 @@ const VideosGrid = () => {
           {videos?.map((video) => (
 
             <a key={video.$id}
-            href="/videoId"
+              href="/videoId"
               className="relative block border border-gray-100"
             >
               <button
@@ -58,9 +61,10 @@ const VideosGrid = () => {
               />
 
               <div className="p-6">
-                <p className="text-sm font-medium text-gray-600">
-                  OWNER_ID: {video.$write[0]}
-                </p>
+                <h5 className="mt-1 text-lg font-bold truncate">
+                  Created by: {video.CreatedBy}
+                </h5>
+
 
                 <h5 className="mt-1 text-lg font-bold truncate">
                   TITLE: {video.Title}

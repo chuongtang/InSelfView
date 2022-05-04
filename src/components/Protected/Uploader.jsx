@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { AlertWarning, AlertError } from '../Alerts';
-import {createVideo} from '../../actions/videoActions'
+import { AlertWarning, AlertError, AlertSuccess } from '../Alerts';
+import { createVideo } from '../../actions/videoActions'
 import Loader from '../Loader'
 
 const Uploader = () => {
@@ -11,14 +11,23 @@ const Uploader = () => {
   const { userInfo } = userLogin;
   const [message, setMessage] = useState(null);
   const [showUpload, setShowUpload] = useState(false);
+  const [successUpl, setSuccessUpl] = useState(false);
   const [title, setTitle] = useState("");
-  
+  const [createdBy, setCreatedBy] = useState("");
+
   const videoCreate = useSelector((state) => state.videoCreate)
   const { loading, video, success, error } = videoCreate
 
   useEffect(() => {
+
+    userInfo? setCreatedBy(userInfo.name) : setShowUpload(false)
     if (success) {
+      setShowUpload(false)
       console.log("=>Successfully uploaded video and recorded in DB")
+      setSuccessUpl(success)
+      setTimeout(() => {
+        setSuccessUpl(!success);
+      }, 3000);
     }
   }, [success]);
 
@@ -27,20 +36,20 @@ const Uploader = () => {
       e.preventDefault();
     }
     console.log("Uplaoder clicked")
-    let formData = new FormData();
+    // let formData = new FormData();
 
     let submitFile = document.querySelector("#customFile");
 
-    if (typeof submitFile.files[0] === 'undefined'|| title=="") { 
+    if (typeof submitFile.files[0] === 'undefined' || title == "") {
       setMessage("All fields required");
-      return  setTimeout(() => {
+      return setTimeout(() => {
         setMessage("");
-      }, 3000); 
+      }, 3000);
     }
     const fileToUpl = submitFile.files[0]
     // console.log("submit file :", fileToUpl);
 
-    formData.append("file", submitFile.files[0]);
+    // formData.append("file", submitFile.files[0]);
     const fileSize = submitFile.files[0].size;
     console.log("file size for uploading ", fileSize);
 
@@ -50,15 +59,13 @@ const Uploader = () => {
         setMessage("");
       }, 4000);
     } else {
-      formData.append("name", submitFile.files[0].name);
-      formData.append("title", title);
-      formData.append("userID", userInfo.$id);
-
-      // console.log("formData userID:", userInfo.$id);
-      // console.log("formData ", submitFile.files.length);
+      // formData.append("name", submitFile.files[0].name);
+      // formData.append("title", title);
+      // formData.append("userID", userInfo.$id);
+      // console.log("FORMDATA^^^^^",formData);
     }
     try {
-      dispatch(createVideo(fileToUpl, title));
+      dispatch(createVideo(fileToUpl, title, createdBy));
       console.log("createdVideo dispatched")
     } catch (error) {
       setMessage(error.message);
@@ -82,9 +89,10 @@ const Uploader = () => {
           </p>
 
           <div className="mt-8 sm:items-center sm:justify-center sm:flex">
-            <button className="flex px-5 py-3 font-medium text-white bg-blue-500 rounded-lg shadow-xl hover:bg-blue-600" onClick={() => setShowUpload(true)}>
+            {!successUpl ? <button className="flex px-5 py-3 font-medium text-white bg-blue-500 rounded-lg shadow-xl hover:bg-blue-600" onClick={() => setShowUpload(true)}>
               Continue
-            </button>
+            </button> : <AlertSuccess message={"Video Upload Success"} />}
+
 
           </div>
         </div>
@@ -97,7 +105,7 @@ const Uploader = () => {
             {error && <AlertError message={error} />}
 
             <form onSubmit={onSubmit}>
-            {/* <form onSubmit={onSubmit}> */}
+              {/* <form onSubmit={onSubmit}> */}
               <div className="modal-body relative p-2">
                 <div className="space-y-2 ">
                   <label htmlFor="title" className="text-green-500 font-bold p-2">Title or question related to this Video</label>
@@ -118,26 +126,26 @@ const Uploader = () => {
                 </div>
               </div>
               {!loading ?
-              <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
-                <button className="flex bg-transparent border border-red-400 text-sm md:text-lg text-red-400 hover:bg-red-400 hover:text-white text-center p-2 my-4 rounded-lg mr-4" onClick={() => setShowUpload(false)}>
-                  <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
-                    <path d="M7 10.625H14.2C14.2 10.625 14.2 10.625 14.2 10.625C14.2 10.625 17 10.625 17 13.625C17 17 14.2 17 14.2 17H13.4" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M10.5 14L7 10.625L10.5 7" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  Cancel
-                </button>
-                <button
-                  className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded-lg"
-                  type="submit"
-                >
-                  <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
-                    <path d="M12 22V13M12 13L15.5 16.5M12 13L8.5 16.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  Upload
-                </button>
-              </div> : <Loader/>}
+                <div className="modal-footer flex flex-shrink-0 flex-wrap items-center justify-center p-4 border-t border-gray-200 rounded-b-md">
+                  <button className="flex bg-transparent border border-red-400 text-sm md:text-lg text-red-400 hover:bg-red-400 hover:text-white text-center p-2 my-4 rounded-lg mr-4" onClick={() => setShowUpload(false)}>
+                    <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
+                      <path d="M7 10.625H14.2C14.2 10.625 14.2 10.625 14.2 10.625C14.2 10.625 17 10.625 17 13.625C17 17 14.2 17 14.2 17H13.4" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M10.5 14L7 10.625L10.5 7" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    Cancel
+                  </button>
+                  <button
+                    className="flex bg-transparent border border-green-500 text-sm md:text-lg text-green-500 hover:bg-green-500 hover:text-white text-center p-2 my-4 rounded-lg"
+                    type="submit"
+                  >
+                    <svg width="24" height="24" strokeWidth="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-2">
+                      <path d="M12 22V13M12 13L15.5 16.5M12 13L8.5 16.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    Upload
+                  </button>
+                </div> : <Loader />}
             </form>
           </div>
         </div>)

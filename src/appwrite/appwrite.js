@@ -44,7 +44,8 @@ let api = {
 
   listDocuments: async () => {
     console.log("Listing documents FIRED")
-    const returnList = await api.provider().database.listDocuments(Server.collectionID);
+    const returnList = await api.provider().database.listDocuments(Server.collectionID, [], 100, 0);
+    // const returnList = await api.provider().database.listDocuments(Server.collectionID);
     console.log("Listing documents", returnList)
     return returnList
   },
