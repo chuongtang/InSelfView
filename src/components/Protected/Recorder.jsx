@@ -55,14 +55,14 @@ const Recorder = () => {
   const handleDownload = useCallback(() => {
     if (recordedChunks.length) {
       const blob = new Blob(recordedChunks, {
-        type: "video/webm",
+        type: "video/mp4",
       });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       document.body.appendChild(a);
       a.style = "display: none";
       a.href = url;
-      a.download = "react-webcam-stream-capture.webm";
+      a.download = "Inselfview";
       a.click();
       window.URL.revokeObjectURL(url);
       setRecordedChunks([]);
@@ -157,9 +157,9 @@ const Recorder = () => {
                 <video className="h-lg w-auto mx-auto rounded-lg" controls>
                   <source
                     src={URL.createObjectURL(
-                      new Blob(recordedChunks, { type: "video/webm" })
+                      new Blob(recordedChunks, { type: "video/mp4" })
                     )}
-                    type="video/webm"
+                    type="video/mp4"
                   />
                 </video>
               </div>
