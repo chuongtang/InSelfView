@@ -8,22 +8,19 @@ import { listVideos, viewVideo } from '../../actions/videoActions';
 
 const VideosGrid = () => {
 
+  const [showGrid, setShowGrid] = useState(false);
+
   const dispatch = useDispatch();
 
   const videoList = useSelector((state) => state.videosList);
   const { loading, error, videos } = videoList;
- 
+
   const videoCreate = useSelector((state) => state.videoCreate)
-  const {  success } = videoCreate
+  const { success } = videoCreate
 
   useEffect(() => {
-
     dispatch(listVideos());
   }, [success]);
-
-  console.log("videos from useEffect", videos)
-  console.log("loading from useEffect", loading)
-  console.log("error from useEffect", error)
 
   return (
     <section>
@@ -34,9 +31,17 @@ const VideosGrid = () => {
           <h2 className="relative inline-block px-4 text-2xl font-bold text-center bg-white">
             View other's recording
           </h2>
+          <div className="mt-8 sm:items-center sm:justify-center sm:flex">
+            <button className="flex px-5 py-3 font-medium text-white bg-yellow-500 rounded-lg shadow-xl hover:bg-blue-500" onClick={() => setShowGrid(!showGrid)}>
+              Toggle videos list
+            </button>          
+          </div>
         </div>
+        {error && <AlertError message={error} />}
+        {loading && <Loader />}
 
-        <div className="grid grid-cols-2 mt-8 lg:grid-cols-4 gap-x-4 gap-y-8">
+        {showGrid &&
+        <div className="grid grid-cols-2 mt-8 lg:grid-cols-4 gap-x-4 gap-y-8" >
           {videos?.map((video) => (
 
             <a key={video.$id}
@@ -90,8 +95,7 @@ const VideosGrid = () => {
               </div>
             </a>
           ))}
-
-        </div>
+        </div>}
 
         <div className="mt-4 text-center">
           <button type="button" className="text-xs text-gray-500 underline">Clear Recently Viewed</button>

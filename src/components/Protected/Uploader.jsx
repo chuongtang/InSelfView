@@ -89,7 +89,7 @@ const Uploader = () => {
           </p>
 
           <div className="mt-8 sm:items-center sm:justify-center sm:flex">
-            {!successUpl ? <button className="flex px-5 py-3 font-medium text-white bg-blue-500 rounded-lg shadow-xl hover:bg-blue-600" onClick={() => setShowUpload(true)}>
+            {!successUpl ? <button className="flex px-5 py-3 font-medium text-white bg-blue-500 rounded-lg shadow-xl hover:bg-yellow-500" onClick={() => setShowUpload(true)}>
               Continue
             </button> : <AlertSuccess message={"Video Upload Success"} />}
 
