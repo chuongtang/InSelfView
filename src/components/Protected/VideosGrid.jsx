@@ -69,13 +69,14 @@ const VideosGrid = () => {
                   </svg>
                 </button>
                 
-                <iframe className="w-full h-auto rounded-lg"
+                <video className="max-h-30 w-auto mx-auto rounded-lg"
                 Title={video.Title}
                 loading="lazy"
                 src={`https://${urlStart}${video.videoID}${urlEnd}`} 
-                control={true} >
+                // control={true} 
+                >
 
-                </iframe>
+                </video>
                 <div className="p-6">
                   <h5 className="mt-1 text-lg truncate">
                     Posted by: {video.CreatedBy}
