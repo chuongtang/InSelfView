@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import Placeholder from '../../images/vdPlaceHolder.svg'
+// import Placeholder from '../../images/vdPlaceHolder.svg'
 import { useDispatch, useSelector } from 'react-redux';
 import { AlertInfo, AlertWarning, AlertSuccess, AlertError } from '../Alerts'
 import Loader from '../Loader'
-import { listVideos, viewVideo } from '../../actions/videoActions';
+import { listVideos } from '../../actions/videoActions';
 import dotenv from 'dotenv';
 
 const urlStart = import.meta.env.VITE_APPWRITE_VIEWLINK_P1
@@ -54,7 +54,7 @@ const VideosGrid = () => {
         {showGrid &&
           <div className="grid grid-cols-2 mt-8 lg:grid-cols-4 gap-x-4 gap-y-8" id="midGrid" >
             {videos?.map((video) => (
-                // let previewURL = `${urlStart}${video.$id}${urlEnd}`;
+ 
               <a key={video.$id}
                 href={`https://${urlStart}${video.videoID}${urlEnd}`}
                 className="relative block border border-gray-100"
@@ -77,7 +77,7 @@ const VideosGrid = () => {
 
                 </iframe>
                 <div className="p-6">
-                  <h5 className="mt-1 text-lg font-bold truncate">
+                  <h5 className="mt-1 text-lg truncate">
                     Posted by: {video.CreatedBy}
                   </h5>
 
@@ -85,8 +85,8 @@ const VideosGrid = () => {
                   <h5 className="mt-1 text-lg font-bold truncate">
                     TITLE: {video.Title}
                   </h5>
-                  <p>playLink (id) of this video: {video.videoID}</p>
-                  <p className="truncate">NAME: {video.VideoName}</p>
+                  {/* <p>playLink (id) of this video: {video.videoID}</p> */}
+                  <p className="truncate font-bold text-sm">Video: {video.VideoName}</p>
                   <button
                     name="add"
                     type="button"
