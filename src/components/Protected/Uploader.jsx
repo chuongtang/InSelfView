@@ -64,6 +64,7 @@ const Uploader = () => {
     try {
       dispatch(createVideo(fileToUpl, title, createdBy));
       console.log("createdVideo dispatched")
+      setTitle("");
     } catch (error) {
       setMessage(error.message);
     }

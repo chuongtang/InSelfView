@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AlertInfo, AlertWarning, AlertSuccess, AlertError } from '../Alerts'
 import Loader from '../Loader'
 import { listVideos, viewVideo } from '../../actions/videoActions';
+import dotenv from 'dotenv';
 
+const urlStart = import.meta.env.VITE_APPWRITE_VIEWLINK_P1
+const urlEnd = import.meta.env.VITE_APPWRITE_VIEWLINK_P2
+ 
 
 const VideosGrid = () => {
 
@@ -24,6 +28,7 @@ const VideosGrid = () => {
     // dispatch(viewVideo("6271fb3009848c49dac9"))
   }, [success]);
 
+ 
   return (
     <section id="gridTop">
       <div className="max-w-screen-xl px-4 py-8 mx-auto">
@@ -49,9 +54,9 @@ const VideosGrid = () => {
         {showGrid &&
           <div className="grid grid-cols-2 mt-8 lg:grid-cols-4 gap-x-4 gap-y-8" id="midGrid" >
             {videos?.map((video) => (
-
+                // let previewURL = `${urlStart}${video.$id}${urlEnd}`;
               <a key={video.$id}
-                href="/videoId"
+                href={`https://${urlStart}${video.videoID}${urlEnd}`}
                 className="relative block border border-gray-100"
               >
                 <button
@@ -63,14 +68,14 @@ const VideosGrid = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                   </svg>
                 </button>
+                
+                <iframe className="w-full h-auto rounded-lg"
+                Title={video.Title}
+                loading="lazy"
+                src={`https://${urlStart}${video.videoID}${urlEnd}`} 
+                control={true} >
 
-                <img
-                  loading="lazy"
-                  alt="Build Your Own Drone"
-                  className="object-contain w-full h-56"
-                  src={Placeholder}
-                />
-
+                </iframe>
                 <div className="p-6">
                   <h5 className="mt-1 text-lg font-bold truncate">
                     Posted by: {video.CreatedBy}
