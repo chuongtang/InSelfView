@@ -73,7 +73,7 @@ const VideosGrid = () => {
 
                 <div className="p-6">
                   <h5 className="mt-1 text-lg font-bold truncate">
-                    Created by: {video.CreatedBy}
+                    Posted by: {video.CreatedBy}
                   </h5>
 
 
