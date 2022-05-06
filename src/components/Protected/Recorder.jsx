@@ -55,7 +55,7 @@ const Recorder = () => {
   const handleDownload = useCallback(() => {
     if (recordedChunks.length) {
       const blob = new Blob(recordedChunks, {
-        type: "video/mp4",
+        type: "video/webm",
       });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -157,7 +157,7 @@ const Recorder = () => {
                 <video className="h-lg w-auto mx-auto rounded-lg" controls>
                   <source
                     src={URL.createObjectURL(
-                      new Blob(recordedChunks, { type: "video/mp4" })
+                      new Blob(recordedChunks, { type: "video/webm" })
                     )}
                     type="video/mp4"
                   />

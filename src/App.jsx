@@ -4,6 +4,7 @@ import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
 import Header from './components/Header'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import VideoPreviewer from './components/Protected/VideoPreviewer'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/in" element={<VideoPreviewer />} />
         </Routes>
       </Router>
     </>
