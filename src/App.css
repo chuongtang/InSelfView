@@ -94,3 +94,7 @@ html {
   visibility: visible;
   right: 0;
 }
+
+svg.star-svg {
+  display: inline;
+}
