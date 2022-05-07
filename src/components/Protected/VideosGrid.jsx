@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AlertInfo, AlertWarning, AlertSuccess, AlertError } from '../Alerts'
 import Loader from '../Loader'
 import { listVideos } from '../../actions/videoActions';
+import VideoPreviewer from '../Protected/VideoPreviewer'
 
 import dotenv from 'dotenv';
 const urlStart = import.meta.env.VITE_APPWRITE_VIEWLINK_P1
 const urlEnd = import.meta.env.VITE_APPWRITE_VIEWLINK_P2
 
 
-const VideosGrid = () => {
+const VideosGrid = ({prop}) => {
 
   const [showGrid, setShowGrid] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -86,7 +87,7 @@ const VideosGrid = () => {
                     name="add"
                     type="button"
                     className="flex items-center justify-center w-full px-8 py-4 mt-4 bg-yellow-500 rounded-lg shadow-lg"
-                    onClick={() => setPlayVideoID(true)}
+                    onClick={() => setPlayVideoID(video.$id)}
                   >
                     <span className="text-sm font-medium">
                       Preview / Play
@@ -109,6 +110,9 @@ const VideosGrid = () => {
           <a href="#gridTop">
             <button type="button" className="block fixed right-14 bottom-8 z-99 bg-rose-500 p-2 text-xs text-white rounded-lg shadow-lg font-bold animate-bounce"
             >Top ⇑</button></a>}
+
+        {playVideoID !== "" && <VideoPreviewer videoID={playVideoID}/>
+        }
 
       </div>
     </section >

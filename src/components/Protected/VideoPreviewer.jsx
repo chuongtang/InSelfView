@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import dotenv from 'dotenv';
 const urlStart = import.meta.env.VITE_APPWRITE_VIEWLINK_P1
 const urlEnd = import.meta.env.VITE_APPWRITE_VIEWLINK_P2
@@ -6,12 +6,14 @@ import ReactPlayer from 'react-player'
 import { Rating } from 'react-simple-star-rating'
 
 
-const VideoPreviewer = (videoID) => {
+const VideoPreviewer = ({videoID}) => {
 
-  const [playVideoID, setPlayVideoID] = useState("no ID found")
+  const [playVideoID, setPlayVideoID] = useState("")
 
-  const [ratingValue, setRatingValue] = useState(0)
-  
+  const [ratingValue, setRatingValue] = useState(3)
+
+  const [comments, setComments] = useState("")
+
   const handleRating = (rate) => {
     setRatingValue(rate)
   }
@@ -41,8 +43,13 @@ const VideoPreviewer = (videoID) => {
     '#f1d045'
   ]
 
+  useEffect(() => {
+    setPlayVideoID(videoID);
+    
+  }, [videoID]);
+
   return (
-    <div>
+    <div className="modal fade fixed top-0 left-0 w-full h-full outline-none  overflow-y-auto bg-gray-500 bg-opacity-40 z-60 ">
       {playVideoID !== "" &&
         (<section>
           <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
@@ -60,7 +67,7 @@ const VideoPreviewer = (videoID) => {
               <div className="lg:col-span-3">
                 <div className="relative mt-4">
                   <ReactPlayer
-                    url="https://crypgame.win/v1/storage/buckets/626f430157c288bb80eb/files/62733aa4982a2bf55f27/view?project=626706b0d57bfb074288&mode=admin"
+                    url={`https://crypgame.win/v1/storage/buckets/626f430157c288bb80eb/files/${playVideoID}/view?project=626706b0d57bfb074288&mode=admin`}
                     playing={true}
                     controls={true}
                     pip={false}
@@ -74,7 +81,6 @@ const VideoPreviewer = (videoID) => {
 
               <div className="lg:top-0 lg:sticky">
                 <form className="space-y-4 lg:pt-8">
-                  
                   <Rating
                     onClick={handleRating}
                     ratingValue={ratingValue}
@@ -84,56 +90,46 @@ const VideoPreviewer = (videoID) => {
                     showTooltip
                     tooltipArray={tooltipArray}
                     fillColorArray={fillColorArray}
-                  
                   />
 
                   <div className="p-4 bg-gray-100 border rounded">
-                    <p className="text-sm">
-                      <span className="block">
-                        Pay as low as $3/mo with 0% APR.
-                      </span>
 
-                      <a href="" className="inline-block mt-1 underline">
-                        Find out more
-                      </a>
-                    </p>
+                    <label className="sr-only" htmlFor="comment">Co</label>
+                    <textarea
+                      className="w-full p-3 text-sm border-gray-200 rounded-lg"
+                      placeholder="Comment?"
+                      rows="8"
+                      id="comment"
+                    ></textarea>
                   </div>
-
-                  <div>
-                    <p className="text-xl font-bold">
-                      $19.99
-                    </p>
-                  </div>
-
                   <button
                     type="submit"
                     className="w-full px-6 py-3 text-sm font-bold tracking-wide text-white uppercase bg-red-700 rounded"
                   >
-                    Add to cart
+                    Submit comment
                   </button>
 
                   <button
                     type="button"
                     className="w-full px-6 py-3 text-sm font-bold tracking-wide uppercase bg-gray-100 border border-gray-300 rounded"
                   >
-                    Notify when on sale
+                    Done? close this page?
                   </button>
                 </form>
               </div>
 
               <div className="lg:col-span-3">
                 <div className="prose max-w-none">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem ad labore nostrum, a explicabo iste est dolorem deserunt id ullam magni accusamus saepe, nulla sed sint reiciendis, aperiam cumque officiis!</p>
 
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi eveniet ipsam mollitia nesciunt illo! Suscipit, corrupti!</p>
 
-                  <h3>Features</h3>
-
+                  <p className="text-xl font-bold">
+                    all comments for this video will be render here.
+                  </p>
                   <ul>
-                    <li>Smooth neck design</li>
-                    <li>Breathable fabric</li>
-                    <li>Odour prevention</li>
-                    <li>Made from recycled materials</li>
+                    <li>User1: dkjasnfkjcnsl</li>
+                    <li>User2: ojfn</li>
+                    <li>User3: jyktkjg</li>
+                    <li>User4: kmgbvksmfpb</li>
                   </ul>
 
 
