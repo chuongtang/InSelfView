@@ -66,11 +66,11 @@ const VideoPreviewer = ({ video }) => {
           <div className="ml-4">
             <div>
               <h1 className="text-2xl font-bold lg:text-3xl">
-                {playVideoID} here is the play ID
+                {video.Title}
               </h1>
 
               <p className="mt-1 text-sm text-gray-500">
-                HEre is the posted by......{video.CreatedBy}
+                Posted by: <span className="font-bold">{video.CreatedBy}</span>
               </p>
             </div>
 
@@ -136,7 +136,7 @@ const VideoPreviewer = ({ video }) => {
                       <p className="text-xl font-bold">
                         all comments for this video will be render here.
                       </p>
-                      <ul>
+                      <ul className="overflow-clip">
                         {currentVideoComments?.map((comment, index) => <li key={index}>{comment}</li>)}
                       </ul>
 

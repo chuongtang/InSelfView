@@ -41,7 +41,7 @@ const VideosGrid = ({ prop }) => {
             View other's recording
           </h2>
           <a href="#midGrid" className="mt-12 sm:items-center sm:justify-center sm:flex ">
-            <button className="flex px-5 py-3 font-medium text-white bg-blue-500 rounded-lg shadow-xl hover:bg-yellow-500"
+            <button className="flex mx-auto px-5 py-3 font-medium text-white bg-blue-500 rounded-lg shadow-xl hover:bg-yellow-500"
               onClick={() => {
                 setShowGrid(!showGrid)
                 setScrolled(!scrolled)
