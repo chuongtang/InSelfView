@@ -14,8 +14,6 @@ const VideoPreviewer = ({ video }) => {
   const [currentVideoComments, setCurrentVideoComments] = useState([])
   const [ratingValue, setRatingValue] = useState(3)
 
-  // const [comments, setComments] = useState("")
-
   const commentCreate = useSelector((state) => state.commentCreate)
   const { loading, success, error} = commentCreate
   // const commentsList = useSelector((state) => state.commentsList)
@@ -61,9 +59,10 @@ const VideoPreviewer = ({ video }) => {
   }, [video.$id]);
 
   return (
-    <div className="modal fade fixed top-0 left-0 w-full h-full outline-none  overflow-y-auto bg-gray-600 bg-opacity-80 z-60 ">
-      {playVideoID !== "" &&
-        (<section className="relative max-w-screen-xl px-4 py-8 my-4 bg-white rounded-lg mx-auto">
+    <>
+    {playVideoID !== "" &&
+    (<div className="modal fade fixed top-0 left-0 w-full h-full outline-none  overflow-y-auto bg-gray-600 bg-opacity-80 z-60 ">
+     <section className="relative max-w-screen-xl px-4 py-8 my-4 bg-white rounded-lg mx-auto">
           <div className="ml-4">
             <div>
               <h1 className="text-2xl font-bold lg:text-3xl">
@@ -126,6 +125,7 @@ const VideoPreviewer = ({ video }) => {
                   <button
                     type="button"
                     className="w-full px-6 py-3 text-sm font-bold tracking-wide uppercase bg-gray-100 border border-gray-300 rounded-lg"
+                    onClick={()=> setPlayVideoID("")}
                   >
                     Done? close this page?
                   </button>
@@ -137,15 +137,7 @@ const VideoPreviewer = ({ video }) => {
                         all comments for this video will be render here.
                       </p>
                       <ul>
-                        {currentVideoComments?.map(comment => <li>{comment}</li>)}
-                        {/* <li>User1: dkjasnfkjcnsl</li>
-                        <li>User2: ojfn</li>
-                        <li>User3: jyktkjg</li>
-                        <li>User4: kmgbvksmfpb</li>
-                        <li>User4: kmgbvksmfpb</li>
-                        <li>User4: kmgbvksmfpb</li>
-                        <li>User4: kmgbvksmfpb</li>
-                        <li>User4: kmgbvksmfpb</li> */}
+                        {currentVideoComments?.map((comment, index) => <li key={index}>{comment}</li>)}
                       </ul>
 
 
@@ -157,9 +149,9 @@ const VideoPreviewer = ({ video }) => {
 
             </div>
           </div>
-        </section>)
-      }
-    </div>
+        </section>
+    </div>)}
+    </>
   )
 }
 

@@ -16,7 +16,7 @@ const VideosGrid = ({ prop }) => {
   const [showGrid, setShowGrid] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [playVideoID, setPlayVideoID] = useState("");
-  const [videoComments, setVideoComments] = useState([]);
+  const [videoToPreview, setVideoToPreview] = useState({});
   const dispatch = useDispatch();
 
   const videoList = useSelector((state) => state.videosList);
@@ -84,34 +84,34 @@ const VideosGrid = ({ prop }) => {
                     Posted by: {video.CreatedBy}
                   </h5>
                   <button
-                    name="add"
                     type="button"
                     className="flex items-center justify-center w-full px-8 py-4 mt-4 bg-yellow-500 rounded-lg shadow-lg"
                     onClick={() => {
                       setPlayVideoID(video.$id);
-                      setVideoComments(video.comments)
+                      setVideoToPreview(video)
                     }}
                   >
                     <span className="text-sm font-medium">
                       Preview / Play
                     </span>
-
+{/* 
                     <svg
                       className="w-5 h-5 ml-1.5"
                       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
+                    </svg> */}
                   </button>
-                    {/* Modal fro video preview when button is clicked */}
-                  {playVideoID !== "" && <VideoPreviewer video={video} />
-                  }
+
                 </div>
               </div>
             ))}
 
           </div>}
-
+        {/* Modal fro video preview when button is clicked */}
+        {playVideoID !== "" && <VideoPreviewer video={videoToPreview}  />
+        }
+        {/* Scrol Top btn */}
         {scrolled &&
           <a href="#gridTop">
             <button type="button" className="block fixed right-14 bottom-8 z-99 bg-rose-500 p-2 text-xs text-white rounded-lg shadow-lg font-bold animate-bounce"
