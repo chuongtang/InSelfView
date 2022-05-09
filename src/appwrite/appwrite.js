@@ -49,7 +49,7 @@ let api = {
     return returnList
   },
 
-  updateDocument: (collectionId, documentId, data, read, write) => {
+  updateComment: (collectionId, documentId, data, read, write) => {
     return api
       .provider()
       .database.updateDocument(collectionId, documentId, data, read, write);

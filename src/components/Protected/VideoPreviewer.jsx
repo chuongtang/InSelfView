@@ -6,7 +6,7 @@ import ReactPlayer from 'react-player'
 import { Rating } from 'react-simple-star-rating'
 
 
-const VideoPreviewer = ({videoID}) => {
+const VideoPreviewer = ({ videoID }) => {
 
   const [playVideoID, setPlayVideoID] = useState("")
 
@@ -45,14 +45,14 @@ const VideoPreviewer = ({videoID}) => {
 
   useEffect(() => {
     setPlayVideoID(videoID);
-    
+
   }, [videoID]);
 
   return (
-    <div className="modal fade fixed top-0 left-0 w-full h-full outline-none  overflow-y-auto bg-gray-500 bg-opacity-40 z-60 ">
+    <div className="modal fade fixed top-0 left-0 w-full h-full outline-none  overflow-y-auto bg-gray-600 bg-opacity-80 z-60 ">
       {playVideoID !== "" &&
-        (<section>
-          <div className="relative max-w-screen-xl px-4 py-8 mx-auto">
+        (<section className="relative max-w-screen-xl px-4 py-8 my-4 bg-white rounded-lg mx-auto">
+          <div className="ml-4">
             <div>
               <h1 className="text-2xl font-bold lg:text-3xl">
                 {playVideoID} here is the play ID
@@ -63,7 +63,7 @@ const VideoPreviewer = ({videoID}) => {
               </p>
             </div>
 
-            <div className="grid gap-8 lg:items-start lg:grid-cols-4">
+            <div className="grid gap-2 lg:items-start lg:grid-cols-4">
               <div className="lg:col-span-3">
                 <div className="relative mt-4">
                   <ReactPlayer
@@ -73,68 +73,74 @@ const VideoPreviewer = ({videoID}) => {
                     pip={false}
                     width='90%'
                     height='90%'
-                    className="absolue top-0 left-0 "
+                    className="absolue top-0 left-0 rounded-2xl "
                   />
-
-                </div>
-              </div>
-
-              <div className="lg:top-0 lg:sticky">
-                <form className="space-y-4 lg:pt-8">
                   <Rating
                     onClick={handleRating}
                     ratingValue={ratingValue}
-                    size={30}
+                    size={40}
                     transition
                     allowHalfIcon
                     showTooltip
                     tooltipArray={tooltipArray}
                     fillColorArray={fillColorArray}
+                    className="mt-8 place-self-center"
                   />
+                </div>
+              </div>
 
-                  <div className="p-4 bg-gray-100 border rounded">
+              <div className="lg:top-0 lg:sticky">
+                <form className="space-y-4 lg:pt-8">
+
+
+                  <div className="p-2 bg-gray-100 border rounded-lg">
 
                     <label className="sr-only" htmlFor="comment">Co</label>
                     <textarea
                       className="w-full p-3 text-sm border-gray-200 rounded-lg"
                       placeholder="Comment?"
-                      rows="8"
+                      rows="6"
                       id="comment"
                     ></textarea>
                   </div>
                   <button
                     type="submit"
-                    className="w-full px-6 py-3 text-sm font-bold tracking-wide text-white uppercase bg-red-700 rounded"
+                    className="w-full px-6 py-3 text-sm font-bold tracking-wide text-white uppercase bg-red-700 rounded-lg"
                   >
                     Submit comment
                   </button>
 
                   <button
                     type="button"
-                    className="w-full px-6 py-3 text-sm font-bold tracking-wide uppercase bg-gray-100 border border-gray-300 rounded"
+                    className="w-full px-6 py-3 text-sm font-bold tracking-wide uppercase bg-gray-100 border border-gray-300 rounded-lg"
                   >
                     Done? close this page?
                   </button>
+                  <div className="lg:col-span-3">
+                    <div className="prose max-w-none">
+
+
+                      <p className="text-xl font-bold">
+                        all comments for this video will be render here.
+                      </p>
+                      <ul>
+                        <li>User1: dkjasnfkjcnsl</li>
+                        <li>User2: ojfn</li>
+                        <li>User3: jyktkjg</li>
+                        <li>User4: kmgbvksmfpb</li>
+                        <li>User4: kmgbvksmfpb</li>
+                        <li>User4: kmgbvksmfpb</li>
+                        <li>User4: kmgbvksmfpb</li>
+                        <li>User4: kmgbvksmfpb</li>
+                      </ul>
+
+
+                    </div>
+                  </div>
                 </form>
               </div>
 
-              <div className="lg:col-span-3">
-                <div className="prose max-w-none">
 
-
-                  <p className="text-xl font-bold">
-                    all comments for this video will be render here.
-                  </p>
-                  <ul>
-                    <li>User1: dkjasnfkjcnsl</li>
-                    <li>User2: ojfn</li>
-                    <li>User3: jyktkjg</li>
-                    <li>User4: kmgbvksmfpb</li>
-                  </ul>
-
-
-                </div>
-              </div>
             </div>
           </div>
         </section>)
