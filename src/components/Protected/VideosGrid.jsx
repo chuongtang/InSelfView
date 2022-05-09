@@ -11,12 +11,12 @@ const urlStart = import.meta.env.VITE_APPWRITE_VIEWLINK_P1
 const urlEnd = import.meta.env.VITE_APPWRITE_VIEWLINK_P2
 
 
-const VideosGrid = ({prop}) => {
+const VideosGrid = ({ prop }) => {
 
   const [showGrid, setShowGrid] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [playVideoID, setPlayVideoID] = useState("");
-
+  const [videoComments, setVideoComments] = useState([]);
   const dispatch = useDispatch();
 
   const videoList = useSelector((state) => state.videosList);
@@ -52,7 +52,7 @@ const VideosGrid = ({prop}) => {
         </div>
         {error && <AlertError message={error} />}
         {loading && <Loader />}
-      
+
         {showGrid &&
           <div className="grid grid-cols-2 mt-8 lg:grid-cols-4 gap-x-4 gap-y-8"  >
             {videos?.map((video) => (
@@ -87,7 +87,10 @@ const VideosGrid = ({prop}) => {
                     name="add"
                     type="button"
                     className="flex items-center justify-center w-full px-8 py-4 mt-4 bg-yellow-500 rounded-lg shadow-lg"
-                    onClick={() => setPlayVideoID(video.$id)}
+                    onClick={() => {
+                      setPlayVideoID(video.$id);
+                      setVideoComments(video.comments)
+                    }}
                   >
                     <span className="text-sm font-medium">
                       Preview / Play
@@ -100,6 +103,9 @@ const VideosGrid = ({prop}) => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                     </svg>
                   </button>
+                    {/* Modal fro video preview when button is clicked */}
+                  {playVideoID !== "" && <VideoPreviewer video={video} />
+                  }
                 </div>
               </div>
             ))}
@@ -111,8 +117,6 @@ const VideosGrid = ({prop}) => {
             <button type="button" className="block fixed right-14 bottom-8 z-99 bg-rose-500 p-2 text-xs text-white rounded-lg shadow-lg font-bold animate-bounce"
             >Top ⇑</button></a>}
 
-        {playVideoID !== "" && <VideoPreviewer videoID={playVideoID}/>
-        }
 
       </div>
     </section >

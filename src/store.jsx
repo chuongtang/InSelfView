@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { userLoginReducer, userRegisterReducer} from './reducers/userReducers'
 import {videoCreateReducer, myVideosListReducer, videoDetailsReducer} from './reducers/videoReducers'
-import {commentCreateReducer, myCommentsListReducer} from './reducers/commentReducers'
+import {commentCreateReducer, commentsListReducer} from './reducers/commentReducers'
 
 const reducer = combineReducers({
   
@@ -14,7 +14,7 @@ const reducer = combineReducers({
   videosList: myVideosListReducer,
   videoDetails: videoDetailsReducer,
   commentCreate: commentCreateReducer,
-  commentsList: myCommentsListReducer
+  commentsList: commentsListReducer
 
 });
 

@@ -4,15 +4,24 @@ const urlStart = import.meta.env.VITE_APPWRITE_VIEWLINK_P1
 const urlEnd = import.meta.env.VITE_APPWRITE_VIEWLINK_P2
 import ReactPlayer from 'react-player'
 import { Rating } from 'react-simple-star-rating'
+import { useDispatch, useSelector } from 'react-redux';
+import { listComments } from '../../actions/commentActions';
 
 
-const VideoPreviewer = ({ videoID }) => {
+const VideoPreviewer = ({ video }) => {
 
   const [playVideoID, setPlayVideoID] = useState("")
-
+  const [currentVideoComments, setCurrentVideoComments] = useState([])
   const [ratingValue, setRatingValue] = useState(3)
 
-  const [comments, setComments] = useState("")
+  // const [comments, setComments] = useState("")
+
+  const commentCreate = useSelector((state) => state.commentCreate)
+  const { loading, success, error} = commentCreate
+  // const commentsList = useSelector((state) => state.commentsList)
+  // const { loadingList, comments, errorList} = commentsList
+
+  const dispatch = useDispatch();
 
   const handleRating = (rate) => {
     setRatingValue(rate)
@@ -44,9 +53,12 @@ const VideoPreviewer = ({ videoID }) => {
   ]
 
   useEffect(() => {
-    setPlayVideoID(videoID);
+    console.log('id from paretn',video.videoID)
+    setPlayVideoID(video.videoID);
+    console.log('cooment from paretn component', video.Comments)
+    setCurrentVideoComments(video.Comments);
 
-  }, [videoID]);
+  }, [video.$id]);
 
   return (
     <div className="modal fade fixed top-0 left-0 w-full h-full outline-none  overflow-y-auto bg-gray-600 bg-opacity-80 z-60 ">
@@ -59,7 +71,7 @@ const VideoPreviewer = ({ videoID }) => {
               </h1>
 
               <p className="mt-1 text-sm text-gray-500">
-                HEre is the posted by......
+                HEre is the posted by......{video.CreatedBy}
               </p>
             </div>
 
@@ -75,6 +87,7 @@ const VideoPreviewer = ({ videoID }) => {
                     height='90%'
                     className="absolue top-0 left-0 rounded-2xl "
                   />
+                 
                   <Rating
                     onClick={handleRating}
                     ratingValue={ratingValue}
@@ -124,14 +137,15 @@ const VideoPreviewer = ({ videoID }) => {
                         all comments for this video will be render here.
                       </p>
                       <ul>
-                        <li>User1: dkjasnfkjcnsl</li>
+                        {currentVideoComments?.map(comment => <li>{comment}</li>)}
+                        {/* <li>User1: dkjasnfkjcnsl</li>
                         <li>User2: ojfn</li>
                         <li>User3: jyktkjg</li>
                         <li>User4: kmgbvksmfpb</li>
                         <li>User4: kmgbvksmfpb</li>
                         <li>User4: kmgbvksmfpb</li>
                         <li>User4: kmgbvksmfpb</li>
-                        <li>User4: kmgbvksmfpb</li>
+                        <li>User4: kmgbvksmfpb</li> */}
                       </ul>
 
 

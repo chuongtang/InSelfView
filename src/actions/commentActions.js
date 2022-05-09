@@ -3,7 +3,7 @@ import {
   COMMENT_CREATE_REQUEST,
   COMMENT_CREATE_SUCCESS,
   COMMENT_CREATE_FAIL,
-  COMMENT_CREATE_RESET,
+ 
   COMMENT_LIST_REQUEST,
   COMMENT_LIST_SUCCESS,
   COMMENT_LIST_FAIL,
@@ -16,7 +16,7 @@ export const listComments = () => async (
   try {
     dispatch({ type: COMMENT_LIST_REQUEST });
 
-    const data = await api.listDocuments();//**************************** */
+    const data = await api
     
     dispatch({
       type:  COMMENT_LIST_SUCCESS,
