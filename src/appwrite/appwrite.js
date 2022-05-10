@@ -10,7 +10,6 @@ let api = {
     }
     let appwrite = new Appwrite();
     appwrite.setEndpoint(Server.endpoint).setProject(Server.project);
-    // appwrite.setKey(Server.apiKEY);
     api.sdk = appwrite;
     return appwrite;
   },
@@ -44,12 +43,11 @@ let api = {
   listDocuments: async () => {
     console.log("Listing documents FIRED")
     const returnList = await api.provider().database.listDocuments(Server.collectionID, [], 100, 0);
-    // const returnList = await api.provider().database.listDocuments(Server.collectionID);
     console.log("Listing documents", returnList)
     return returnList
   },
 
-  updateComment: async ( documentId, data) => {
+  updateComment: async (documentId, data) => {
     return await api
       .provider()
       .database.updateDocument(Server.collectionID, documentId, data);

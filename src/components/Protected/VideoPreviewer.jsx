@@ -26,15 +26,14 @@ const VideoPreviewer = ({ video }) => {
   }
 
   const addCommentToDB = () => {
-    // e.preventDefault();
+   
     if (commentDetail == "") {
       return
     } else {
-      // insert newly added comment to array
+
+      // insert ⬇ newly added comment to array
       video.Comments.push(`${userInfo.name} : ${commentDetail}`)
       console.log(video.Comments)
-      // console.log(ne wCommentArray)
-      // dispatch(createComment(newComment))
     }
   }
 
@@ -133,7 +132,6 @@ const VideoPreviewer = ({ video }) => {
                       ></textarea>
                     </div>
                     <button
-                      // type="submit"
                       className="w-full px-6 py-3 text-sm font-bold tracking-wide text-white uppercase bg-red-700 rounded-lg"
                       onClick={(e) => {
                         e.preventDefault
@@ -144,7 +142,6 @@ const VideoPreviewer = ({ video }) => {
                     </button>
 
                     <button
-                      type="button"
                       className="fixed top-4 right-4 p-2 text-sm font-bold bg-rose-500 text-white rounded-lg"
                       onClick={() => setPlayVideoID("")}
                     >

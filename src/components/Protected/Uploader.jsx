@@ -36,7 +36,7 @@ const Uploader = () => {
       e.preventDefault();
     }
     console.log("Uplaoder clicked")
-    // let formData = new FormData();
+    
 
     let submitFile = document.querySelector("#customFile");
 

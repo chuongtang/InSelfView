@@ -23,18 +23,18 @@ export const commentCreateReducer = (state = {}, action) => {
   }
 }
 
-export const commentsListReducer = (state = { comments: [] }, action) => {
-  switch (action.type) {
-    case COMMENT_LIST_REQUEST:
-      return { loadingList: true, comments: [] };
-    case COMMENT_LIST_SUCCESS:
-      return {
-        loadingList: false,
-        comments: action.payload,
-      };
-    case COMMENT_LIST_FAIL:
-      return { loadingList: false, errorList: action.payload };
-    default:
-      return state;
-  }
-}
+// export const commentsListReducer = (state = { comments: [] }, action) => {
+//   switch (action.type) {
+//     case COMMENT_LIST_REQUEST:
+//       return { loadingList: true, comments: [] };
+//     case COMMENT_LIST_SUCCESS:
+//       return {
+//         loadingList: false,
+//         comments: action.payload,
+//       };
+//     case COMMENT_LIST_FAIL:
+//       return { loadingList: false, errorList: action.payload };
+//     default:
+//       return state;
+//   }
+// }
