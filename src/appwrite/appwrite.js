@@ -17,7 +17,7 @@ let api = {
 
   // User APIs 👨🏿‍🤝‍👨🏿
   createAccount: (email, password, name) => {
-    return api.provider().account.create("unique()",email, password, name);
+    return api.provider().account.create("unique()", email, password, name);
   },
 
   getAccount: () => {
@@ -38,7 +38,7 @@ let api = {
   createDocument: (data, read, write) => {
     return api
       .provider()
-      .database.createDocument(Server.collectionID,"unique()", data, read, write);
+      .database.createDocument(Server.collectionID, "unique()", data, read, write);
   },
 
   listDocuments: async () => {
@@ -49,10 +49,10 @@ let api = {
     return returnList
   },
 
-  updateComment: (collectionId, documentId, data, read, write) => {
-    return api
+  updateComment: async ( documentId, data) => {
+    return await api
       .provider()
-      .database.updateDocument(collectionId, documentId, data, read, write);
+      .database.updateDocument(Server.collectionID, documentId, data);
   },
 
   deleteDocument: (collectionId, documentId) => {
@@ -60,16 +60,16 @@ let api = {
   },
 
   // Storage APIs 📀
-  createFile: async(file) => {    
-    const uplResult = await api.provider().storage.createFile(Server.bucketID, "unique()", file); 
-    console.log("&&return from appwrite%%%%",uplResult.$id);
+  createFile: async (file) => {
+    const uplResult = await api.provider().storage.createFile(Server.bucketID, "unique()", file);
+    console.log("&&return from appwrite%%%%", uplResult.$id);
     return uplResult
   },
 
-  getVideosList: async () =>{
+  getVideosList: async () => {
     console.log("appwrite getVideoList fired")
     const videosList = await api.provider().storage.listFiles(Server.bucketID);
-    console.log("Return from appwrite videos list",videosList)
+    console.log("Return from appwrite videos list", videosList)
     return videosList
   },
 
