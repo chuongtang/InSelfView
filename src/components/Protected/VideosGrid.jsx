@@ -17,6 +17,7 @@ const VideosGrid = ({ prop }) => {
   const [scrolled, setScrolled] = useState(false);
   const [playVideoID, setPlayVideoID] = useState("");
   const [videoToPreview, setVideoToPreview] = useState({});
+  const [showPreview, setShowPreview] = useState (false);
   const dispatch = useDispatch();
 
   const videoList = useSelector((state) => state.videosList);
@@ -72,7 +73,7 @@ const VideosGrid = ({ prop }) => {
                   title={video.Title}
                   loading="lazy"
                   src={`https://${urlStart}${video.videoID}${urlEnd}`}
-               
+
                 >
 
                 </video>
@@ -88,6 +89,7 @@ const VideosGrid = ({ prop }) => {
                     className="flex items-center justify-center w-full px-8 py-4 mt-4 bg-yellow-500 rounded-lg shadow-lg"
                     onClick={() => {
                       setPlayVideoID(video.$id);
+                      setShowPreview(true)
                       setVideoToPreview(video)
                     }}
                   >
@@ -102,13 +104,21 @@ const VideosGrid = ({ prop }) => {
           </div>}
 
         {/* Modal for ⬇ video preview when button is clicked */}
-        {playVideoID !== "" && <VideoPreviewer video={videoToPreview}  />
+        {showPreview && <VideoPreviewer video={videoToPreview} />
         }
         {/* Scroll ⬇ Top btn */}
-        {scrolled &&
+        {scrolled && !showPreview &&
           <a href="#gridTop">
             <button type="button" className="block fixed right-14 bottom-8 z-99 bg-rose-500 p-2 text-xs text-white rounded-lg shadow-lg font-bold animate-bounce"
             >Top ⇑</button></a>}
+        {showPreview &&
+        <button
+          className="fixed top-8 right-4 p-2 text-sm font-bold bg-gray-900 text-white rounded-2xl z-80"
+          title={"Close Preview"}
+          onClick={() => setShowPreview(false)}
+        >
+          Close
+        </button>}
       </div>
     </section >
 

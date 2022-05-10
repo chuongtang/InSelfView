@@ -6,16 +6,21 @@ import ReactPlayer from 'react-player'
 import { Rating } from 'react-simple-star-rating'
 import { useDispatch, useSelector } from 'react-redux';
 import { createComment } from '../../actions/commentActions';
-
+import { AlertWarning, AlertError, AlertSuccess } from '../Alerts';
+import Loader from '../Loader'
 
 const VideoPreviewer = ({ video }) => {
 
   const [playVideoID, setPlayVideoID] = useState("")
   const [currentVideoComments, setCurrentVideoComments] = useState([])
   const [ratingValue, setRatingValue] = useState(3)
+  const [showCommentSection, setShowCommentSection] = useState(true)
   const [commentDetail, setCommentDetail] = useState("")
+  const [message, setMessage] = useState("")
+
   const commentCreate = useSelector((state) => state.commentCreate)
   const { loading, success, error } = commentCreate
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -26,14 +31,26 @@ const VideoPreviewer = ({ video }) => {
   }
 
   const addCommentToDB = () => {
-   
+
     if (commentDetail == "") {
       return
     } else {
+      try {
+        // insert ⬇ newly added comment to array
+        video.Comments.push(`- ${userInfo.name} : ${commentDetail}`)
+        console.log(video.Comments)
+        let NewCommentsArray = {
+          "Comments": video.Comments
+        }
+        console.log("***", NewCommentsArray)
+        dispatch(createComment(video.$id, NewCommentsArray))
+        setCommentDetail("")
+        setShowCommentSection(false)
+      } catch (error) {
+        console.log(error)
+        setMessage(error.message)
+      }
 
-      // insert ⬇ newly added comment to array
-      video.Comments.push(`${userInfo.name} : ${commentDetail}`)
-      console.log(video.Comments)
     }
   }
 
@@ -64,11 +81,14 @@ const VideoPreviewer = ({ video }) => {
 
   useEffect(() => {
     console.log('id from paretn', video.videoID)
-    setPlayVideoID(...video.videoID);
+    setPlayVideoID(video.videoID);
+  }, [video]);
+
+  useEffect(() => { //Video.Comments is a local state 
     console.log('cooment from paretn component', video.Comments)
     setCurrentVideoComments(video.Comments);
 
-  }, [video.videoID]);
+  }, [video.Comments]);
 
   return (
     <>
@@ -110,60 +130,59 @@ const VideoPreviewer = ({ video }) => {
                       fillColorArray={fillColorArray}
                       className="mt-8 place-self-center"
                     />
+                    {message && <AlertWarning message={message} />}
+                    {error && <AlertError message={error} />}
+                    {loading && <Loader />}
                   </div>
                 </div>
+                {showCommentSection &&
+                  <div className="lg:top-0 lg:sticky">
+                    <form className="space-y-4 lg:pt-8">
+                      {message && <AlertWarning message={message} />}
+                      {error && <AlertError message={error} />}
+                      {loading && <Loader />}
+                      <div className="p-2 bg-gray-100 border rounded-lg">
 
-                <div className="lg:top-0 lg:sticky">
-                  <form className="space-y-4 lg:pt-8">
-
-
-                    <div className="p-2 bg-gray-100 border rounded-lg">
-
-                      <label className="sr-only" htmlFor="comment">Co</label>
-                      <textarea
-                        className="w-full p-3 text-sm border-gray-200 rounded-lg"
-                        placeholder="Comment?"
-                        rows="6"
-                        id="comment"
-                        required
-                        onChange={(e) =>
-                          setCommentDetail(e.target.value)
-                        }
-                      ></textarea>
-                    </div>
-                    <button
-                      className="w-full px-6 py-3 text-sm font-bold tracking-wide text-white uppercase bg-red-700 rounded-lg"
-                      onClick={(e) => {
-                        e.preventDefault
-                        addCommentToDB()
-                      }}
-                    >
-                      Submit comment
-                    </button>
-
-                    <button
-                      className="fixed top-4 right-4 p-2 text-sm font-bold bg-rose-500 text-white rounded-lg"
-                      onClick={() => setPlayVideoID("")}
-                    >
-                      Close
-                    </button>
-                    <div className="lg:col-span-3">
-                      <div className="prose max-w-none">
-
-
-                        <p className="text-xl font-bold">
-                          all comments for this video will be render here.
-                        </p>
-                        <ul className="overflow-clip">
-                          {currentVideoComments?.map((comment, index) => <li key={index}>{comment}</li>)}
-                        </ul>
-
-
+                        <label className="sr-only" htmlFor="comment">Co</label>
+                        <textarea
+                          className="w-full p-3 text-sm border-gray-200 rounded-lg"
+                          placeholder="Comment?"
+                          rows="6"
+                          id="comment"
+                          required
+                          onChange={(e) =>
+                            setCommentDetail(e.target.value)
+                          }
+                        ></textarea>
                       </div>
-                    </div>
-                  </form>
-                </div>
+                      <button
+                        className="w-full px-6 py-3 text-sm font-bold tracking-wide text-white uppercase bg-red-700 rounded-lg"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          addCommentToDB()
+                        }}
+                      >
+                        Submit comment
+                      </button>
 
+
+                      <div className="lg:col-span-3">
+                        <div className="prose max-w-none">
+
+
+                          <p className="text-xl font-bold">
+                            all comments for this video will be render here.
+                          </p>
+                          <ul className="overflow-clip">
+                            {currentVideoComments?.map((comment, index) => <li key={index}>{comment}</li>)}
+                          </ul>
+
+
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                }
 
               </div>
             </div>
