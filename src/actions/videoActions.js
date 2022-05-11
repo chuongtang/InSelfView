@@ -1,5 +1,5 @@
 import api from '../appwrite/appwrite'
-import { 
+import {
   VIDEO_CREATE_REQUEST,
   VIDEO_CREATE_SUCCESS,
   VIDEO_CREATE_FAIL,
@@ -7,10 +7,10 @@ import {
   VIDEO_LIST_REQUEST,
   VIDEO_LIST_SUCCESS,
   VIDEO_LIST_FAIL,
-  
-} from '../constants/reduxConstants'; 
 
-export const createVideo =  (file, title, createdBy) => async (dispatch, getState) => {
+} from '../constants/reduxConstants';
+
+export const createVideo = (file, title, createdBy) => async (dispatch, getState) => {
   try {
     dispatch({
       type: VIDEO_CREATE_REQUEST,
@@ -18,20 +18,20 @@ export const createVideo =  (file, title, createdBy) => async (dispatch, getStat
 
     const data = await api.createFile(file);
     const dbRecord = await api.createDocument({ "Create_date": data.dateCreated, "Title": title, "VideoName": data.name, "videoID": data.$id, "CreatedBy": createdBy }, ['role:all'], [`${data.$write[0]}`]);
-    console.log("Return dbRecord fromdatabase******",dbRecord)
+    console.log("Return dbRecord fromdatabase******", dbRecord)
 
     dispatch({
       type: VIDEO_CREATE_SUCCESS,
       payload: dbRecord,
     });
 
-    console.log("payload when dispatch video_create_success***",data)
+    console.log("payload when dispatch video_create_success***", data)
   } catch (error) {
     const message =
       error.response && error.response.message
         ? error.response.message
         : error.message
-    if (message === 'Not authorized, token failed') {
+    if (message === 'Not authorized') {
       dispatch(logout())
     }
     dispatch({
@@ -46,7 +46,7 @@ export const listVideos = () => async (
     dispatch({ type: VIDEO_LIST_REQUEST });
 
     const data = await api.listDocuments();
-    console.log("Return videoList fromdatabase******",data.documents.reverse())
+    console.log("Return videoList fromdatabase******", data.documents.reverse())
 
     dispatch({
       type: VIDEO_LIST_SUCCESS,
@@ -57,7 +57,7 @@ export const listVideos = () => async (
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message
-    if (message === 'Not authorized, token failed') {
+    if (message === 'Not authorized') {
       dispatch(logout())
     }
     dispatch({
@@ -67,7 +67,7 @@ export const listVideos = () => async (
   }
 }
 
-export const viewVideo = async(id) =>{
+export const viewVideo = async (id) => {
   return await api.getVideoView(id);
-   
+
 }

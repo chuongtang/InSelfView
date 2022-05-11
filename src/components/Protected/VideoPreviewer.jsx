@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import dotenv from 'dotenv';
-const urlStart = import.meta.env.VITE_APPWRITE_VIEWLINK_P1
-const urlEnd = import.meta.env.VITE_APPWRITE_VIEWLINK_P2
 import ReactPlayer from 'react-player'
-import { Rating } from 'react-simple-star-rating'
 import { useDispatch, useSelector } from 'react-redux';
-import { createComment } from '../../actions/commentActions';
+import { updateFieldInDB } from '../../actions/commentActions';
 import { AlertWarning, AlertError, AlertSuccess } from '../Alerts';
 import Loader from '../Loader'
 
@@ -13,10 +9,10 @@ const VideoPreviewer = ({ video }) => {
 
   const [playVideoID, setPlayVideoID] = useState("")
   const [currentVideoComments, setCurrentVideoComments] = useState([])
-  const [ratingValue, setRatingValue] = useState(3)
   const [showCommentSection, setShowCommentSection] = useState(true)
   const [commentDetail, setCommentDetail] = useState("")
   const [message, setMessage] = useState("")
+  const [likeClicked, setLikeClicked] = useState(false)
 
   const commentCreate = useSelector((state) => state.commentCreate)
   const { loading, success, error } = commentCreate
@@ -26,8 +22,17 @@ const VideoPreviewer = ({ video }) => {
 
   const dispatch = useDispatch();
 
-  const handleRating = (rate) => {
-    setRatingValue(rate)
+  const updtTotalLikestoDB = () => {
+
+    try {
+      let newLikes = {
+        "TotalLikes": video.TotalLikes++
+      }
+      dispatch(updateFieldInDB(video.$id, newLikes))
+    } catch (error) {
+      setMessage(error.message)
+    }
+
   }
 
   const addCommentToDB = () => {
@@ -38,54 +43,26 @@ const VideoPreviewer = ({ video }) => {
       try {
         // insert ⬇ newly added comment to array
         video.Comments.push(`- ${userInfo.name} : ${commentDetail}`)
-        console.log(video.Comments)
         let NewCommentsArray = {
           "Comments": video.Comments
         }
-        console.log("***", NewCommentsArray)
-        dispatch(createComment(video.$id, NewCommentsArray))
+
+        dispatch(updateFieldInDB(video.$id, NewCommentsArray))
         setCommentDetail("")
         setShowCommentSection(false)
       } catch (error) {
-        console.log(error)
+
         setMessage(error.message)
       }
 
     }
   }
 
-  const tooltipArray = [
-    'Terrible',
-    'Terrible+',
-    'Bad',
-    'Bad+',
-    'Average',
-    'Average+',
-    'Great',
-    'Great+',
-    'Awesome',
-    'Awesome+'
-  ]
-  const fillColorArray = [
-    '#f17a45',
-    '#f17a45',
-    '#f19745',
-    '#f19745',
-    '#f1a545',
-    '#f1a545',
-    '#f1b345',
-    '#f1b345',
-    '#f1d045',
-    '#f1d045'
-  ]
-
   useEffect(() => {
-    console.log('id from paretn', video.videoID)
     setPlayVideoID(video.videoID);
   }, [video]);
 
   useEffect(() => { //Video.Comments is a local state 
-    console.log('cooment from paretn component', video.Comments)
     setCurrentVideoComments(video.Comments);
 
   }, [video.Comments]);
@@ -118,25 +95,28 @@ const VideoPreviewer = ({ video }) => {
                       height='90%'
                       className="absolue top-0 left-0 rounded-2xl "
                     />
-
-                    <Rating
-                      onClick={handleRating}
-                      ratingValue={ratingValue}
-                      size={40}
-                      transition
-                      allowHalfIcon
-                      showTooltip
-                      tooltipArray={tooltipArray}
-                      fillColorArray={fillColorArray}
-                      className="mt-8 place-self-center"
-                    />
+                    {likeClicked ? <p className="text-rose-500 animate-pulse">Total likes: {video.TotalLikes + 1} ♥</p> :
+                      <button
+                        type="button"
+                        name="like"
+                        className="absolute p-2 text-white bg-rose-500 rounded-full right-4 top-4 animate-bounce"
+                        onClick={() => {
+                          setLikeClicked(true)
+                          updtTotalLikestoDB()
+                        }}
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                      </button>}
                     {message && <AlertWarning message={message} />}
                     {error && <AlertError message={error} />}
                     {loading && <Loader />}
                   </div>
                 </div>
-                {showCommentSection &&
-                  <div className="lg:top-0 lg:sticky">
+
+                <div className="lg:top-0 lg:sticky">
+                  {showCommentSection &&
                     <form className="space-y-4 lg:pt-8">
                       {message && <AlertWarning message={message} />}
                       {error && <AlertError message={error} />}
@@ -164,26 +144,19 @@ const VideoPreviewer = ({ video }) => {
                       >
                         Submit comment
                       </button>
-
-
-                      <div className="lg:col-span-3">
-                        <div className="prose max-w-none">
-
-
-                          <p className="text-xl font-bold">
-                            all comments for this video will be render here.
-                          </p>
-                          <ul className="overflow-clip">
-                            {currentVideoComments?.map((comment, index) => <li key={index}>{comment}</li>)}
-                          </ul>
-
-
-                        </div>
-                      </div>
                     </form>
+                  }
+                  <div className="lg:col-span-3">
+                    <div className="prose max-w-none">
+                      <p className="text-xl font-bold">
+                        Reviews and Feedback
+                      </p>
+                      <ul className="overflow-clip">
+                        {currentVideoComments?.map((comment, index) => <li key={index}>{comment}</li>)}
+                      </ul>
+                    </div>
                   </div>
-                }
-
+                </div>
               </div>
             </div>
           </section>

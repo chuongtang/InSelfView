@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-// import Placeholder from '../../images/vdPlaceHolder.svg'
 import { useDispatch, useSelector } from 'react-redux';
 import { AlertInfo, AlertWarning, AlertSuccess, AlertError } from '../Alerts'
 import Loader from '../Loader'
@@ -17,7 +16,7 @@ const VideosGrid = ({ prop }) => {
   const [scrolled, setScrolled] = useState(false);
   const [playVideoID, setPlayVideoID] = useState("");
   const [videoToPreview, setVideoToPreview] = useState({});
-  const [showPreview, setShowPreview] = useState (false);
+  const [showPreview, setShowPreview] = useState(false);
   const dispatch = useDispatch();
 
   const videoList = useSelector((state) => state.videosList);
@@ -28,7 +27,6 @@ const VideosGrid = ({ prop }) => {
 
   useEffect(() => {
     dispatch(listVideos());
-    // dispatch(viewVideo("6271fb3009848c49dac9"))
   }, [success]);
 
 
@@ -59,21 +57,10 @@ const VideosGrid = ({ prop }) => {
             {videos?.map((video) => (
 
               <div key={video.$id} className="relative block border border-gray-100 rounded-lg" >
-                <button
-                  type="button"
-                  name="like"
-                  className="absolute p-2 text-white bg-rose-500 rounded-full right-4 top-4"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                  </svg>
-                </button>
-
                 <video className="max-h-30 w-auto mx-auto rounded-lg mt-4"
                   title={video.Title}
                   loading="lazy"
                   src={`https://${urlStart}${video.videoID}${urlEnd}`}
-
                 >
 
                 </video>
@@ -94,7 +81,7 @@ const VideosGrid = ({ prop }) => {
                     }}
                   >
                     <span className="text-sm font-medium">
-                      Preview / Play
+                      Preview
                     </span>
                   </button>
 
@@ -112,13 +99,13 @@ const VideosGrid = ({ prop }) => {
             <button type="button" className="block fixed right-14 bottom-8 z-99 bg-rose-500 p-2 text-xs text-white rounded-lg shadow-lg font-bold animate-bounce"
             >Top ⇑</button></a>}
         {showPreview &&
-        <button
-          className="fixed top-8 right-4 p-2 text-sm font-bold bg-gray-900 text-white rounded-2xl z-80"
-          title={"Close Preview"}
-          onClick={() => setShowPreview(false)}
-        >
-          Close
-        </button>}
+          <button
+            className="fixed top-8 right-4 p-2 text-sm font-bold bg-gray-900 text-white rounded-2xl z-80"
+            title={"Close Preview"}
+            onClick={() => setShowPreview(false)}
+          >
+            Close
+          </button>}
       </div>
     </section >
 

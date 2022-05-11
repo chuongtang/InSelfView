@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../actions/userActions";
 import { AlertWarning, AlertError } from './Alerts';
@@ -19,16 +19,7 @@ const SignUp = () => {
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
-  console.log('userRegister from selector', error)
-
-
-  useEffect(() => {
-    if (userInfo) {
-      console.log("user info from useEffect***", userInfo)
-    }
-  }, [userInfo]);
-
-
+  // console.log('userRegister from selector', error)
 
   const submitHandler = (e) => {
     e.preventDefault();

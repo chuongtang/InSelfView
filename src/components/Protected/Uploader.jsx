@@ -83,7 +83,7 @@ const Uploader = () => {
           </p>
 
           <p className="mt-2 text-xl font-bold sm:text-3xl">
-            Upload and share your recoding for comments
+            Upload and share your recording for comments
           </p>
 
           <div className="mt-8 sm:items-center sm:justify-center sm:flex">

@@ -1,14 +1,14 @@
 import api from '../appwrite/appwrite'
-import { 
+import {
   COMMENT_CREATE_REQUEST,
   COMMENT_CREATE_SUCCESS,
   COMMENT_CREATE_FAIL,
-  
-} from '../constants/reduxConstants'; 
+
+} from '../constants/reduxConstants';
 
 
 // 
-export const createComment =  (documentId, data) => async (dispatch, getState) => {
+export const updateFieldInDB = (documentId, data) => async (dispatch, getState) => {
   try {
     dispatch({
       type: COMMENT_CREATE_REQUEST,
@@ -20,13 +20,13 @@ export const createComment =  (documentId, data) => async (dispatch, getState) =
       payload: returnedData,
     });
 
-    console.log("payload when dispatch COMMENT_create_success***",returnedData)
+    console.log("payload when dispatch COMMENT_create_success***", returnedData)
   } catch (error) {
     const message =
       error.response && error.response.message
         ? error.response.message
         : error.message
-    if (message === 'Not authorized, token failed') {
+    if (message === 'Not authorized') {
       dispatch(logout())
     }
     dispatch({
