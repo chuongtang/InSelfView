@@ -6,7 +6,7 @@
 
 **Frontend:** 
   * <img src="https://chuongtang.github.io/sourceStore/logos/Vite.png" alt="VITE"
-	title="VITE logo" height="20" /> [VITE:](https://vitejs.dev) superfast frontend tool to render <img src="https://chuongtang.github.io/sourceStore/logos/React.png" alt="React"
+	title="VITE logo" height="20" /> [VITE:](https://vitejs.dev) a super fast frontend tool to render <img src="https://chuongtang.github.io/sourceStore/logos/React.png" alt="React"
 	title="React logo" height="20" /> React.
 
 **State management:** 
@@ -34,7 +34,7 @@
  
 **Deployment:** 
 * <img src="https://chuongtang.github.io/sourceStore/smallLogos/Vultr.jpg" alt="Vultr Logo"
-	title="Vultr logo" height="20" /> [Vultr Cloud: ](https://www.vultr.com/products/cloud-compute/) Appwrite's deployed on an Vultr instance with Ubuntu VM. 
+	title="Vultr logo" height="20" /> [Vultr Cloud: ](https://www.vultr.com/products/cloud-compute/) Appwrite's deployed on a Vultr instance with an Ubuntu VM. 
 
 * <img src="https://chuongtang.github.io/sourceStore/smallLogos/Cloudflare.jpg" alt="Cloudflare Logo"
 	title="Cloudflare logo" height="20" /> [Cloudflare Page: ](https://pages.cloudflare.com) support Git integration for automated deployments. Just connect your repo and push!
@@ -66,7 +66,7 @@ npm i
 https://appwrite.io/docs/installation
 ```
 
-<p>5. Register secret api Keys (DB collection Project...) into a .env and import into this app</p>
+<p>5. Register secret api Keys (DB, collection, Project...) into a .env file and import into this app. Follow this guide</p>
 
 ```
 https://vitejs.dev/guide/env-and-mode.html
@@ -88,4 +88,4 @@ npm run dev
 
 ## 📣Feedback
 
-If you have any feedback, please reach out to me at email@chuongtang.com
+If you have any comments, please reach out to me at email@chuongtang.com
