@@ -2,11 +2,16 @@
 
 <p id="description">Improve your online presentation and ace the next virtual interview.</p>
 
-## Tech Stack
+## 🧱Tech Stack
 
 **Frontend:** 
   * <img src="https://chuongtang.github.io/sourceStore/logos/Vite.png" alt="VITE"
 	title="VITE logo" height="20" /> [VITE:](https://vitejs.dev) superfast frontend tool to render <img src="https://chuongtang.github.io/sourceStore/logos/React.png" alt="React"
+	title="React logo" height="20" /> React.
+
+**State management:** 
+  * <img src="https://chuongtang.github.io/sourceStore/logos/Redux.jpg" alt="Redux"
+	title="Redux logo" height="20" /> [Redux:](https://redux.js.org/) A Predictable State Container for <img src="https://chuongtang.github.io/sourceStore/logos/React.png" alt="React"
 	title="React logo" height="20" /> React.
 
 **User Authentication :** 
@@ -75,12 +80,12 @@ npm run dev
 
 
 
-## License
+## 📜License
 
 <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">
 <img src="https://img.shields.io/badge/License-APACHE%20LICENSE%2C%20VERSION%202.0-green" alt="Apache License"	title="Apache licenses Apache Software"  height="20" />
 </a>
 
-## Feedback
+## 📣Feedback
 
 If you have any feedback, please reach out to me at email@chuongtang.com
